@@ -1,0 +1,16 @@
+2019-12-27 20:36:23 WARN  DBService:217 - Unable to succesfully log in
+2019-12-28 10:26:40 WARN  DBService:217 - Unable to succesfully log in
+2019-12-28 10:30:22 WARN  DBService:217 - Unable to succesfully log in
+2019-12-28 10:40:19 WARN  DBService:198 - Unable to retrieve information
+org.postgresql.util.PSQLException: ERROR: relation "ers.reimbursements" does not exist
+  Position: 15
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:108)
+	at ersapplication.DBService.getReimbursement(DBService.java:167)
+	at ersapplication.System.getReimbursement(System.java:24)
+	at ersapplication.Driver.main(Driver.java:10)

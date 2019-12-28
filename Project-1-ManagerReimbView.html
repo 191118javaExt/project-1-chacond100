@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <title>Employee Reimbursements Status</title>
+</head>
+<body>
+  <style>
+    .container{color:white}
+    body{background-color:rgb(73, 0, 0);}
+    .page-header{color:white}
+    form {color:white}
+    .table{text-align:center}
+   </style>
+
+<div class="container">
+  <h2> Employee Reimbursements</h2>
+  <p>Please contact HR for any further inquiries regarding reimbursements</p>                                                                                      
+  <div class="table-responsive">          
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Amount (USD)</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Receipt</th>
+        <th>Time of Submission</th>
+        <th>Time of Approval</th>
+        <th>Status ID</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>100</td>
+        <td>Lodging</td>
+        <td>Lodging for the New York trip</td>
+        <td>Receipt</td>
+        <td>10:00 PM</td>
+        <td>3:05 AM</td>
+        <td>Approved</td>
+      </tr>
+    </tbody>
+  </table>
+  
+
+  </div>
+
+  <form>
+    <div class="form-group row">
+      <label for="inputReimbursement ID" class="col-sm-2 col-form-label">Reimbursement ID</label>
+      <div class="col-sm-6">
+        <input type="Reimbursement ID" class="form-control" id="inputReimbursement ID" placeholder="Reimbursement ID">
+      </div>
+    </div>
+   
+    <fieldset class="form-group">
+      <div class="row">
+        
+        <div class="col-sm-6">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="gridReimbursement Type" id="gridReimbursement Type1" value="option1" checked>
+            <label class="form-check-label" for="gridReimbursement Type1">
+              Approve
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="gridReimbursement Type" id="gridReimbursement Type2" value="option2">
+            <label class="form-check-label" for="gridReimbursement Type2">
+              Decline
+            </label>
+          </div>
+        
+          
+        </div>
+      </div>
+    </fieldset>
+    
+    <div class="form-group row">
+      <div class="col-sm-6">
+        <button style="background-color: white; color:rgb(73, 0, 0)"  type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+</body>
+</html>
