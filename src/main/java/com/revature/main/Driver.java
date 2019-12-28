@@ -1,7 +1,9 @@
-package ersapplication;
+package com.revature.main;
+
 import org.apache.log4j.Logger;
 
-import static java.lang.System.out;
+import ersapplication.Employee;
+import ersapplication.System;
 
 public class Driver {
 	private static Logger logger = Logger.getLogger(Driver.class);
