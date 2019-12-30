@@ -1,4 +1,4 @@
-package ersapplication;
+package com.revature.ersapplication;
 
 import org.apache.log4j.Logger;
 
@@ -55,7 +55,7 @@ public class DBService {
 		try (Connection connection = connect()){
 			connection.setAutoCommit(false);
 			
-			String addUserSql = "INSERT INTO ERS.USERS (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, EMAIL, ROLE_ID) VALUES (?,?,?,?,?,?)";
+			String addUserSql = "INSERT INTO \"ERS\".USERS (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, EMAIL, ROLE_ID) VALUES (?,?,?,?,?,?)";
 			PreparedStatement addUser = connection.prepareStatement(addUserSql, Statement.RETURN_GENERATED_KEYS);
 			addUser.setString(1, first_name);
 			addUser.setString(2, last_name);
@@ -80,7 +80,7 @@ public class DBService {
 			try (Connection connection = connect()){
 				connection.setAutoCommit(false);
 				
-				String addReimbursementSql = "INSERT INTO ERS.REIMBURSEMENTS (AMOUNT, DESCRIPTION, RECEIPT, AUTHOR, RESOLVER, STATUS_ID, TYPE) VALUES (?,?,?,?,?,?,?)";
+				String addReimbursementSql = "INSERT INTO \"ERS\".REIMBURSEMENTS (AMOUNT, DESCRIPTION, RECEIPT, AUTHOR, RESOLVER, STATUS_ID, TYPE) VALUES (?,?,?,?,?,?,?)";
 				PreparedStatement addReimbursement = connection.prepareStatement(addReimbursementSql, Statement.RETURN_GENERATED_KEYS);
 				addReimbursement.setInt(1, amount);
 				addReimbursement.setString(2, description);
@@ -104,7 +104,7 @@ public class DBService {
 		boolean updateReimbStatus(int status_ID, int author, int reimb_ID) {
 			boolean success = false;
 			try(Connection connection = connect()){
-				String updateReimbStatusSql = "UPDATE ERS.REIMBURSEMENTS SET STATUS_ID = ?, AUTHOR=? WHERE REIMB_ID = ?";  
+				String updateReimbStatusSql = "UPDATE \"ERS\".REIMBURSEMENTS SET STATUS_ID = ?, AUTHOR=? WHERE REIMB_ID = ?";  
 				PreparedStatement updateReimb = connection.prepareStatement(updateReimbStatusSql);
 				updateReimb.setInt(1, status_ID);
 				updateReimb.setInt(2, author);
@@ -122,7 +122,7 @@ public class DBService {
 			ArrayList<Employee> employees = new ArrayList<>();
 			Connection connection = connect ();
 			try {
-				String findAllEmployeesSql = "SELECT * FROM ERS.REIMBURSEMENTS";
+				String findAllEmployeesSql = "SELECT * FROM \"ERS\".REIMBURSEMENTS";
 				PreparedStatement findAllEmployees = connection.prepareStatement(findAllEmployeesSql);
 				ResultSet findEmployeeResults = findAllEmployees.executeQuery();
 				while(findEmployeeResults.next()) {
@@ -161,13 +161,13 @@ public class DBService {
 		Employee getReimbursement(int reimb_ID) {
 			Employee employee = null;
 			try(Connection connection = connect()){
-				String findReimbSql="SELECT * FROM ERS.REIMBURSEMENTS WHERE REIMB_ID=?";
+				String findReimbSql="SELECT * FROM \"ERS\".REIMBURSEMENTS WHERE REIMBURSEMENTS.REIMB_ID=?";
 				PreparedStatement findReimb = connection.prepareStatement(findReimbSql);
 				findReimb.setInt(1, reimb_ID);
 				ResultSet findReimbResults = findReimb.executeQuery();
 				if(findReimbResults.next()) {
+					
 					ReimbursementType reimbursementType = ReimbursementType.valueOf(findReimbResults.getString("TYPE"));
-					int reimb_ID1 = findReimbResults.getInt("REIMB_ID");
 					int amount = findReimbResults.getInt("AMOUNT");
 					LocalDateTime submissionDate = findReimbResults.getTimestamp("SUBMISSION_DATE").toLocalDateTime();
 					LocalDateTime resolvedDate = findReimbResults.getTimestamp("RESOLVED_DATE").toLocalDateTime();
@@ -178,20 +178,20 @@ public class DBService {
 					int status_ID = findReimbResults.getInt("STATUS_ID");
 					Reimbursement reimbursement;
 					if(reimbursementType == ReimbursementType.Lodging) {
-						reimbursement = new Lodging(reimb_ID1,amount, submissionDate, resolvedDate, description,receipt,author,resolver,status_ID);
+						reimbursement = new Lodging(reimb_ID, amount, submissionDate, resolvedDate, description,receipt,author,resolver,status_ID);
 					}else if (reimbursementType == ReimbursementType.Food){
-						reimbursement = new Lodging(reimb_ID1,amount, submissionDate, resolvedDate, description,receipt,author,resolver,status_ID);
+						reimbursement = new Food(reimb_ID, amount, submissionDate, resolvedDate, description,receipt,author,resolver,status_ID);
 					}else if (reimbursementType == ReimbursementType.Travel){
-						reimbursement = new Lodging(reimb_ID1,amount, submissionDate, resolvedDate, description,receipt,author,resolver,status_ID);
+						reimbursement = new Travel(reimb_ID, amount, submissionDate, resolvedDate, description,receipt,author,resolver,status_ID);
 					}else if (reimbursementType == ReimbursementType.Other){
-						reimbursement = new Lodging(reimb_ID1,amount, submissionDate, resolvedDate, description,receipt,author,resolver,status_ID);
+						reimbursement = new Other(reimb_ID, amount, submissionDate, resolvedDate, description,receipt,author,resolver,status_ID);
 					}else {
 						throw new Exception("Unknown account type");
 					}					
 						employee = new Employee(reimbursement);
 					}
 				else {
-					logger.warn("No reimbursement transaction was found for ID "+ reimb_ID);
+					logger.warn("No reimbursement transaction was found for Reimbursement ID "+ reimb_ID);
 					}	
 				findReimbResults.close();
 				}catch(Exception e) {
@@ -200,11 +200,35 @@ public class DBService {
 				return employee;
 		}
 
+		String getUser(int USER_ID) {
+			String userInformation = null;
+			try(Connection connection = connect()){
+			String findUserSql = "SELECT * FROM \"ERS\".Users WHERE Users.USER_ID=?";
+			PreparedStatement findUser = connection.prepareStatement(findUserSql);
+			findUser.setInt(1, USER_ID);
+			ResultSet findUserResults = findUser.executeQuery();
+			if(findUserResults.next()) { 
+			String username = findUserResults.getString("USERNAME");
+			String password = findUserResults.getString("PASSWORD");
+			String firstName = findUserResults.getString("FIRST_NAME");
+			String lastName = findUserResults.getString("LAST_NAME");
+			String email = findUserResults.getString("EMAIL");
+			int role_ID = findUserResults.getInt("ROLE_ID");
+			
+			userInformation = "First name: " + firstName+ " Last name: " +lastName+ " Username: "+username+" Password: "+password+ " Email: "+email+" Role ID: "+role_ID;
+				}
+			} catch (SQLException e) {
+				logger.warn("Unable to retrieve User", e);
+				e.printStackTrace();
+			} 
+			return userInformation;
+			}
+
 		String login(int user_ID) {
 			
 			String together = null;
 			try(Connection connection = connect()){
-			String findUserSql = "SELECT USERNAME, PASSWORD FROM ERS.USERS WHERE USER_ID=?";
+			String findUserSql = "SELECT USERNAME, PASSWORD FROM \"ERS\".USERS WHERE USER_ID=?";
 			PreparedStatement findUser = connection.prepareStatement(findUserSql);
 			findUser.setInt(1, user_ID);
 			ResultSet findUserResults = findUser.executeQuery();

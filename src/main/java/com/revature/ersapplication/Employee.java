@@ -1,4 +1,4 @@
-package ersapplication;
+package com.revature.ersapplication;
 
 public class Employee {
 	private final Reimbursement reimbursement;

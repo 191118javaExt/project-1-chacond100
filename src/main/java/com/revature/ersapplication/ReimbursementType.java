@@ -1,4 +1,4 @@
-package ersapplication;
+package com.revature.ersapplication;
 
 public enum ReimbursementType {
 	

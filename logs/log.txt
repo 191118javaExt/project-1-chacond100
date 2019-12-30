@@ -14,3 +14,114 @@ org.postgresql.util.PSQLException: ERROR: relation "ers.reimbursements" does not
 	at ersapplication.DBService.getReimbursement(DBService.java:167)
 	at ersapplication.System.getReimbursement(System.java:24)
 	at ersapplication.Driver.main(Driver.java:10)
+2019-12-28 11:12:01 WARN  DBService:198 - Unable to retrieve information
+org.postgresql.util.PSQLException: ERROR: relation "ers.reimbursements" does not exist
+  Position: 15
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:108)
+	at ersapplication.DBService.getReimbursement(DBService.java:167)
+	at ersapplication.System.getReimbursement(System.java:24)
+	at com.revature.main.Driver.main(Driver.java:12)
+2019-12-28 11:13:54 WARN  DBService:198 - Unable to retrieve information
+org.postgresql.util.PSQLException: ERROR: relation "ers.reimbursements" does not exist
+  Position: 15
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:108)
+	at ersapplication.DBService.getReimbursement(DBService.java:167)
+	at ersapplication.System.getReimbursement(System.java:24)
+	at com.revature.main.Driver.main(Driver.java:12)
+2019-12-28 11:16:14 WARN  DBService:194 - No reimbursement transaction was found for ID 1
+2019-12-28 11:17:55 WARN  DBService:198 - Unable to retrieve information
+org.postgresql.util.PSQLException: ERROR: relation "ers.reimbursements" does not exist
+  Position: 15
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:108)
+	at ersapplication.DBService.getReimbursement(DBService.java:167)
+	at ersapplication.System.getReimbursement(System.java:24)
+	at com.revature.main.Driver.main(Driver.java:12)
+2019-12-28 11:18:07 WARN  DBService:194 - No reimbursement transaction was found for ID 1
+2019-12-28 11:19:55 WARN  DBService:194 - No reimbursement transaction was found for ID 1
+2019-12-28 11:32:19 WARN  DBService:194 - No reimbursement transaction was found for ID 1
+2019-12-28 11:36:30 WARN  DBService:198 - Unable to retrieve information
+org.postgresql.util.PSQLException: ERROR: relation "ers.reimbursements" does not exist
+  Position: 15
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:108)
+	at ersapplication.DBService.getReimbursement(DBService.java:167)
+	at ersapplication.System.getReimbursement(System.java:24)
+	at com.revature.main.Driver.main(Driver.java:13)
+2019-12-28 11:43:12 INFO  DBService:165 - SELECT * FROM REIMBURSEMENTS WHERE REIMBURSEMENTS.REIMB_ID=?
+2019-12-28 11:43:12 INFO  DBService:167 - SELECT * FROM REIMBURSEMENTS WHERE REIMBURSEMENTS.REIMB_ID=?
+2019-12-28 11:43:12 INFO  DBService:170 - org.postgresql.jdbc.PgResultSet@6f75e721
+2019-12-28 11:43:12 WARN  DBService:197 - No reimbursement transaction was found for ID 1
+2019-12-28 11:48:39 INFO  DBService:168 - org.postgresql.jdbc.PgResultSet@123772c4
+2019-12-28 11:48:39 WARN  DBService:195 - No reimbursement transaction was found for ID 1
+2019-12-28 11:49:10 WARN  DBService:194 - No reimbursement transaction was found for ID 2
+2019-12-28 11:58:33 WARN  DBService:194 - No reimbursement transaction was found for Reimbursement ID 2
+2019-12-28 11:59:13 WARN  DBService:194 - No reimbursement transaction was found for Reimbursement ID 2
+2019-12-28 12:05:54 WARN  DBService:194 - No reimbursement transaction was found for Reimbursement ID 2
+2019-12-28 12:12:12 WARN  DBService:209 - No reimbursement transaction was found for Reimbursement ID 2
+2019-12-28 12:14:38 WARN  DBService:194 - No reimbursement transaction was found for Reimbursement ID 2
+2019-12-28 12:19:04 WARN  DBService:194 - No reimbursement transaction was found for Reimbursement ID 2
+2019-12-28 12:19:58 WARN  DBService:72 - Unable to add user account
+org.postgresql.util.PSQLException: ERROR: relation "ers.users" does not exist
+  Position: 13
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:124)
+	at ersapplication.DBService.addUser(DBService.java:66)
+	at ersapplication.Application.addUser(Application.java:16)
+	at com.revature.main.Driver.main(Driver.java:11)
+2019-12-28 12:36:54 WARN  DBService:72 - Unable to add user account
+org.postgresql.util.PSQLException: ERROR: relation "ers.users" does not exist
+  Position: 13
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:124)
+	at ersapplication.DBService.addUser(DBService.java:66)
+	at ersapplication.Application.addUser(Application.java:16)
+	at com.revature.main.Driver.main(Driver.java:11)
+2019-12-28 13:51:55 WARN  DBService:44 - Unable to obtain connection to database
+org.postgresql.util.PSQLException: FATAL: database "ERS" does not exist
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.readStartupMessages(QueryExecutorImpl.java:2617)
+	at org.postgresql.core.v3.QueryExecutorImpl.<init>(QueryExecutorImpl.java:135)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:250)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:49)
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:211)
+	at org.postgresql.Driver.makeConnection(Driver.java:458)
+	at org.postgresql.Driver.connect(Driver.java:260)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at ersapplication.DBService.connect(DBService.java:42)
+	at ersapplication.DBService.addUser(DBService.java:55)
+	at ersapplication.Application.addUser(Application.java:16)
+	at com.revature.main.Driver.main(Driver.java:11)

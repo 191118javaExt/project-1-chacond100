@@ -1,4 +1,4 @@
-package ersapplication;
+package com.revature.ersapplication;
 
 import java.io.Serializable;
 import java.sql.Blob;
@@ -27,7 +27,7 @@ public abstract class Reimbursement implements Serializable {
 		return reimbursementNumber;
 	}
 
-	public void setReimbursementNumber(int reimbursementNumber) {
+	void setReimbursementNumber(int reimbursementNumber) {
 		this.reimbursementNumber = reimbursementNumber;
 	}
 
@@ -105,8 +105,10 @@ public abstract class Reimbursement implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Reimbursement [reimbursementNumber=" + reimbursementNumber + ", amount=" + amount + ", description="
-				+ description + ", author=" + author + ", resolver=" + resolver + ", status_ID=" + status_ID
-				+ ", type_ID=" + type_ID + "]";
-	}	
-}
+		return "Reimbursement [reimbursementNumber=" + reimbursementNumber + ", amount=" + amount + ", submissionDate="
+				+ submissionDate + ", resolvedDate=" + resolvedDate + ", description=" + description + ", reciept="
+				+ reciept + ", author=" + author + ", resolver=" + resolver + ", status_ID=" + status_ID + ", type_ID="
+				+ type_ID + "]";
+	}
+
+	}

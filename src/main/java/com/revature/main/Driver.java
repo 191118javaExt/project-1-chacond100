@@ -1,14 +1,15 @@
 package com.revature.main;
 
-import org.apache.log4j.Logger;
+import java.util.ArrayList;
 
-import ersapplication.Employee;
-import ersapplication.System;
+import com.revature.ersapplication.Application;
+import com.revature.ersapplication.Employee;
 
 public class Driver {
-	private static Logger logger = Logger.getLogger(Driver.class);
 	public static void main(String[] args) {
-		System system = new System();
-		Employee employee = system.getReimbursement(1);
+		
+		Application application = new Application();
+		ArrayList<Employee> allReimbursements = application.getAllReimbursements();
+		System.out.println(allReimbursements);
 	}
 }

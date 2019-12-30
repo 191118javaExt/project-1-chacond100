@@ -1,12 +1,12 @@
-package ersapplication;
+package com.revature.ersapplication;
 
 import java.sql.Blob;
 import java.time.LocalDateTime;
 
 @SuppressWarnings("serial")
-public class Other extends Reimbursement {
+public class Food extends Reimbursement{
 		
-		Other(int reimb_ID, int amount, LocalDateTime submissionDate, LocalDateTime resolvedDate, String description, Blob receipt, int author,int resolver,int status_ID){
+		Food(int reimb_ID, int amount, LocalDateTime submissionDate, LocalDateTime resolvedDate, String description, Blob receipt, int author,int resolver,int status_ID){
 			super(reimb_ID);
 			this.setAmount(amount);
 			this.setSubmissionDate(submissionDate);
@@ -20,6 +20,6 @@ public class Other extends Reimbursement {
 		
 		@Override
 		public ReimbursementType getReimbursementType() {
-			return ReimbursementType.Other;
+			return ReimbursementType.Food;
 			}
 	}

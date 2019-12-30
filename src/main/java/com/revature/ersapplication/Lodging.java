@@ -1,4 +1,4 @@
-package ersapplication;
+package com.revature.ersapplication;
 
 import java.sql.Blob;
 import java.time.LocalDateTime;

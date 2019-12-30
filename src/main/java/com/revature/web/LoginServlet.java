@@ -9,17 +9,17 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
+import com.revature.ersapplication.Application;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
-
-import ersapplication.System;
 
 public class LoginServlet extends HttpServlet{
 	
 		private static final long serialVersionUID = 1L;
 		private static Logger logger= Logger.getLogger(LoginServlet.class);
-		System system = new System();
+		Application system = new Application();
 		
 		@Override
 		protected void doPost(HttpServletRequest req, HttpServletResponse res)

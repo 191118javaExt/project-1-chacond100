@@ -1,4 +1,4 @@
-package ersapplication;
+package com.revature.ersapplication;
 
 import java.io.Serializable;
 import java.sql.Blob;
@@ -7,9 +7,10 @@ import org.apache.log4j.Logger;
 
 
 @SuppressWarnings("serial")
-public class System implements Serializable {
+public class Application implements Serializable {
 	
-	//final static Logger logger = Logger.getLogger(EmployeeOptions.class);
+	final static Logger logger = Logger.getLogger(Application.class);
+	
 	private DBService database = new DBService();
 	
 	public int addUser(String first_name, String last_name, String username, String password, String email, int role_ID) {
