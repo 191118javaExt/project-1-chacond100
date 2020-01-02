@@ -125,3 +125,51 @@ org.postgresql.util.PSQLException: FATAL: database "ERS" does not exist
 	at ersapplication.DBService.addUser(DBService.java:55)
 	at ersapplication.Application.addUser(Application.java:16)
 	at com.revature.main.Driver.main(Driver.java:11)
+2020-01-01 11:55:35 WARN  DBService:160 - Failed to retrieve reimbursements
+org.postgresql.util.PSQLException: ERROR: column reimbursements.author does not exist
+  Hint: Perhaps you meant to reference the column "reimbursements.author_id".
+  Position: 42
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:108)
+	at com.revature.ersapplication.DBService.getReimbursements(DBService.java:138)
+	at com.revature.main.Driver.main(Driver.java:25)
+2020-01-01 12:12:03 WARN  DBService:160 - Failed to retrieve reimbursements
+org.postgresql.util.PSQLException: Bad value for type int : Lodging
+	at org.postgresql.jdbc.PgResultSet.toInt(PgResultSet.java:2858)
+	at org.postgresql.jdbc.PgResultSet.getInt(PgResultSet.java:2067)
+	at org.postgresql.jdbc.PgResultSet.getInt(PgResultSet.java:2498)
+	at com.revature.ersapplication.DBService.getReimbursements(DBService.java:150)
+	at com.revature.main.Driver.main(Driver.java:25)
+2020-01-01 12:12:17 WARN  DBService:160 - Failed to retrieve reimbursements
+org.postgresql.util.PSQLException: Bad value for type int : Lodging
+	at org.postgresql.jdbc.PgResultSet.toInt(PgResultSet.java:2858)
+	at org.postgresql.jdbc.PgResultSet.getInt(PgResultSet.java:2067)
+	at org.postgresql.jdbc.PgResultSet.getInt(PgResultSet.java:2498)
+	at com.revature.ersapplication.DBService.getReimbursements(DBService.java:150)
+	at com.revature.main.Driver.main(Driver.java:25)
+2020-01-01 12:25:46 WARN  DBService:160 - Failed to retrieve reimbursements
+org.postgresql.util.PSQLException: Bad value for type int : Lodging
+	at org.postgresql.jdbc.PgResultSet.toInt(PgResultSet.java:2858)
+	at org.postgresql.jdbc.PgResultSet.getInt(PgResultSet.java:2067)
+	at org.postgresql.jdbc.PgResultSet.getInt(PgResultSet.java:2498)
+	at com.revature.ersapplication.DBService.getReimbursements(DBService.java:150)
+	at com.revature.main.Driver.main(Driver.java:25)
+2020-01-01 14:29:40 WARN  DBService:160 - Failed to retrieve reimbursements
+org.postgresql.util.PSQLException: Bad value for type int : Lodging
+	at org.postgresql.jdbc.PgResultSet.toInt(PgResultSet.java:2858)
+	at org.postgresql.jdbc.PgResultSet.getInt(PgResultSet.java:2067)
+	at org.postgresql.jdbc.PgResultSet.getInt(PgResultSet.java:2498)
+	at com.revature.ersapplication.DBService.getReimbursements(DBService.java:150)
+	at com.revature.main.Driver.main(Driver.java:25)
+2020-01-01 14:57:02 WARN  DBService:160 - Failed to retrieve reimbursements
+org.postgresql.util.PSQLException: Bad value for type int : Lodging
+	at org.postgresql.jdbc.PgResultSet.toInt(PgResultSet.java:2858)
+	at org.postgresql.jdbc.PgResultSet.getInt(PgResultSet.java:2067)
+	at org.postgresql.jdbc.PgResultSet.getInt(PgResultSet.java:2498)
+	at com.revature.ersapplication.DBService.getReimbursements(DBService.java:150)
+	at com.revature.main.Driver.main(Driver.java:25)

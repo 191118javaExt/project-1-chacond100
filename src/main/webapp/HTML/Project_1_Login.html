@@ -126,7 +126,9 @@
             background-image: linear-gradient(top left 90deg, #b6e2ff 0%, #6ec2e8 100%);
         }
     </style>
+   
 </head>
+
 <body>
     <div class="logincontent">
         <div class="loginheading">
@@ -136,26 +138,48 @@
            Login
         </div>
         
-        <form method="POST" action="login">
-
-            <label for="UserID">User ID:</label>
-            <input type="number" id="UserID" name="UserID" />
-            <label for="UserName">Username:</label>
-            <input type="text" id="UserName" name="UserName" />
-            <label for="Password"> Password:</label>
-            <input type="password" id="Password" name="Password" />
-       
+        <form name="loginForm" onSubmit="tryLogin(event.preventDefault())">
+            <input type="text" id="username" placeholder="Username" name="username" required>
+            <input type="password" id="password" placeholder="Password" name="password" required>
+            <button  class="loginbtn" value="Login" id="btnSubmitLogin">Login</button>
         </form>
+            
         
-        <form action="Project-1-CreateUser.html">
-            <button  class="loginbtn" value="New User" id="btnSubmit">Login</button>
+         <form action = "http://localhost:8080/project-1/HTML/Project-1-CreateUser.html">
+              <button  class="newuserbtn" value="New User" id="btnSubmitNewUser">New User</button>
         </form>
-
-        <form action="file:///C:/Users/David/Documents/Revature%20Projects/Project-1-EmpReimbView.html/">
-            <button  class="newuserbtn" value="Login" id="btnSubmit">New User</button>
-        </form>
-       
+      
        
     </div>
 </body>
+ <script>
+ 
+ function tryLogin() {
+		
+		let loginForm = document.loginForm;
+		let username = loginForm.username.value;
+		let password = loginForm.password.value;
+		let loginInfo = {
+				username: username,
+				password: password,
+		}
+		console.log(loginInfo);
+		let xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			if((this.readyState === 4) && (this.status === 200)) {
+				sessionStorage.setItem('currentUser', this.responseText);
+				window.location = "http://localhost:8080/project-1/HTML/Project-1-EmpReimbView.html";
+			}
+			if(this.readyState === 4 && this.status === 204) {
+				alert("Failed to succesfully login");
+			}
+		};
+
+		xhr.open("POST", "http://localhost:8080/project-1/login");
+		
+		xhr.send(JSON.stringify(loginInfo));
+		
+	}
+ 
+ </script>
 </html>

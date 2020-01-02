@@ -1,18 +1,19 @@
 package com.revature.ersapplication;
 
-import org.apache.log4j.Logger;
-
 import java.io.IOException;
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Properties;
+import java.util.TreeMap;
+
+import org.apache.log4j.Logger;
+
+import com.revature.models.Reimbursement;
+import com.revature.models.User;
 
 
 public class DBService {
@@ -49,181 +50,148 @@ public class DBService {
 	}
 		
 		//Create User
-		int addUser(String first_name, String last_name, String username, String password, String email, int role_ID) {
-		int user_ID=-1;
+		boolean addUser(User user) {
 		
 		try (Connection connection = connect()){
-			connection.setAutoCommit(false);
 			
 			String addUserSql = "INSERT INTO \"ERS\".USERS (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, EMAIL, ROLE_ID) VALUES (?,?,?,?,?,?)";
-			PreparedStatement addUser = connection.prepareStatement(addUserSql, Statement.RETURN_GENERATED_KEYS);
-			addUser.setString(1, first_name);
-			addUser.setString(2, last_name);
-			addUser.setString(3, username);
-			addUser.setString(4, password);
-			addUser.setString(5, email);
-			addUser.setInt(6, role_ID);
-			addUser.executeUpdate();
-			ResultSet addUserResults = addUser.getGeneratedKeys();
-			if(addUserResults.next()) {
-				user_ID = addUserResults.getInt(1);
+			PreparedStatement addUser = connection.prepareStatement(addUserSql);
+			addUser.setString(1, user.getFirstName());
+			addUser.setString(2, user.getLastName());
+			addUser.setString(3, user.getUsername());
+			addUser.setString(4, user.getPassword());
+			addUser.setString(5, user.getEmail());
+			addUser.setInt(6, user.getRole_ID());
+			addUser.execute();
+			
+			boolean verification = addUser.execute();
+			if(verification == false) {
+				return true;
 			}
-		}catch(SQLException ex) {
-			logger.warn("Unable to add user account", ex);
+
+		} catch (SQLException e) {
+			logger.warn("Failed to create user", e);
+			e.printStackTrace();
 		}
-		return user_ID;
-		}
-		
+		return false;
+	}
+			
 		//Create Reimbursement
-		int addReimbursement(int amount, String description, Blob receipt, int author, int resolver, int status_ID, ReimbursementType reimbursementType) {
-			int reimb_ID=-1;
+		public boolean addReimbursement(Reimbursement reimbursement) {
 			try (Connection connection = connect()){
-				connection.setAutoCommit(false);
-				
-				String addReimbursementSql = "INSERT INTO \"ERS\".REIMBURSEMENTS (AMOUNT, DESCRIPTION, RECEIPT, AUTHOR, RESOLVER, STATUS_ID, TYPE) VALUES (?,?,?,?,?,?,?)";
+				String addReimbursementSql = "INSERT INTO \"ERS\".REIMBURSEMENTS (AMOUNT, SUBMISSION_DATE, RESOLVED_DATE, DESCRIPTION, RECEIPT, AUTHOR, RESOLVER, STATUS_ID, TYPE) VALUES (?,?,?,?,?,?,?,?);";
 				PreparedStatement addReimbursement = connection.prepareStatement(addReimbursementSql, Statement.RETURN_GENERATED_KEYS);
-				addReimbursement.setInt(1, amount);
-				addReimbursement.setString(2, description);
-				addReimbursement.setBlob(3, receipt);
-				addReimbursement.setInt(4, author);
-				addReimbursement.setInt(5, resolver);
-				addReimbursement.setInt(6, status_ID);
-				addReimbursement.setString(7, reimbursementType.name());
-				addReimbursement.executeUpdate();
-				ResultSet addReimbursementResults = addReimbursement.getGeneratedKeys();
-				if(addReimbursementResults.next()) {
-					reimb_ID = addReimbursementResults.getInt(1);
+				addReimbursement.setDouble(1, reimbursement.getAmount());
+				addReimbursement.setString(2, reimbursement.getSubmissionDate());
+				addReimbursement.setString(3, reimbursement.getResolvedDate());
+				addReimbursement.setString(4, reimbursement.getDescription());
+				addReimbursement.setInt(5, reimbursement.getAuthor());
+				addReimbursement.setInt(6, reimbursement.getResolver());
+				addReimbursement.setInt(7, reimbursement.getStatus_ID());
+				addReimbursement.setInt(8, reimbursement.getType_ID());
+				
+				boolean verification = addReimbursement.execute();
+				if(verification == false) {
+					return true;
 				}
 			}catch(SQLException ex) {
 				logger.warn("Unable to add reimbursement request", ex);
 			}
-			return reimb_ID;
+			return false;
 			}
 
 		//Update Reimbursement Status
-		boolean updateReimbStatus(int status_ID, int author, int reimb_ID) {
-			boolean success = false;
+		boolean updateReimbursement(Reimbursement reimbursement) {
 			try(Connection connection = connect()){
-				String updateReimbStatusSql = "UPDATE \"ERS\".REIMBURSEMENTS SET STATUS_ID = ?, AUTHOR=? WHERE REIMB_ID = ?";  
+				String updateReimbStatusSql = "UPDATE \"ERS\".REIMBURSEMENTS SET AMOUNT=?, SUBMISSIONS_DATE=?, DESCRIPTION=?, RECEIPT=?, AUTHOR=?, RESOLVER=?, STATUS_ID=?, TYPE=? WHERE REIMB_ID=?";  
 				PreparedStatement updateReimb = connection.prepareStatement(updateReimbStatusSql);
-				updateReimb.setInt(1, status_ID);
-				updateReimb.setInt(2, author);
-				updateReimb.setInt(3, reimb_ID);
-				updateReimb.executeUpdate();
-				success=true;
+				updateReimb.setDouble(1, reimbursement.getAmount());
+				updateReimb.setString(2, reimbursement.getSubmissionDate());
+				updateReimb.setString(3, reimbursement.getResolvedDate());
+				updateReimb.setString(4, reimbursement.getDescription());
+				updateReimb.setBytes(5, reimbursement.getReceipt());
+				updateReimb.setInt(6, reimbursement.getAuthor());
+				updateReimb.setInt(7, reimbursement.getResolver());
+				updateReimb.setInt(8, reimbursement.getStatus_ID());
+				updateReimb.setInt(9, reimbursement.getType_ID());
+				updateReimb.setInt(10, reimbursement.getReimb_ID());
+				boolean verification = updateReimb.execute();
+				if (verification == false) {
+					return true;
+				}
 				}catch (SQLException ex) {
 					logger.warn("Unable to update reimbursement status", ex);
 				}
-			return success;	
-		}
-		
-		//Get all reimbursements for all Users
-		ArrayList<Employee> getAllReimbursements(){
-			ArrayList<Employee> employees = new ArrayList<>();
-			Connection connection = connect ();
-			try {
-				String findAllEmployeesSql = "SELECT * FROM \"ERS\".REIMBURSEMENTS";
-				PreparedStatement findAllEmployees = connection.prepareStatement(findAllEmployeesSql);
-				ResultSet findEmployeeResults = findAllEmployees.executeQuery();
-				while(findEmployeeResults.next()) {
-					ReimbursementType reimbursementType = ReimbursementType.valueOf(findEmployeeResults.getString("TYPE"));
-					int reimb_ID = findEmployeeResults.getInt("REIMB_ID");
-					int amount = findEmployeeResults.getInt("AMOUNT");
-					LocalDateTime submissionDate = findEmployeeResults.getTimestamp("SUBMISSION_DATE").toLocalDateTime();
-					LocalDateTime resolvedDate = findEmployeeResults.getTimestamp("RESOLVED_DATE").toLocalDateTime();
-					String description = findEmployeeResults.getString("DESCRIPTION");
-					Blob receipt = findEmployeeResults.getBlob("RECEIPT");
-					int author = findEmployeeResults.getInt("AUTHOR");
-					int resolver = findEmployeeResults.getInt("RESOLVED_ID");
-					int status_ID = findEmployeeResults.getInt("STATUS_ID");
-					
-					Reimbursement reimbursement;
-					if(reimbursementType == ReimbursementType.Lodging) {
-						reimbursement = new Lodging(reimb_ID,amount, submissionDate, resolvedDate, description,receipt,author,resolver,status_ID);
-					}else if (reimbursementType == ReimbursementType.Food){
-						reimbursement = new Food(reimb_ID,amount,submissionDate, resolvedDate, description,receipt,author,resolver,status_ID);
-					}else if (reimbursementType == ReimbursementType.Travel){
-						reimbursement = new Travel(reimb_ID,amount, submissionDate, resolvedDate,description,receipt,author,resolver,status_ID);
-					}else if (reimbursementType == ReimbursementType.Other){
-						reimbursement = new Other(reimb_ID,amount, submissionDate, resolvedDate, description,receipt,author,resolver,status_ID);
-					}else {
-						throw new Exception("Unknown account type");
-					}					
-					employees.add(new Employee(reimbursement));
-					}
-				}catch(Exception e) {
-					e.printStackTrace();
-					}
-			return employees;
+			return false;	
 		}
 		
 		//Get reimbursements from specific user
-		Employee getReimbursement(int reimb_ID) {
-			Employee employee = null;
-			try(Connection connection = connect()){
-				String findReimbSql="SELECT * FROM \"ERS\".REIMBURSEMENTS WHERE REIMBURSEMENTS.REIMB_ID=?";
-				PreparedStatement findReimb = connection.prepareStatement(findReimbSql);
-				findReimb.setInt(1, reimb_ID);
-				ResultSet findReimbResults = findReimb.executeQuery();
-				if(findReimbResults.next()) {
-					
-					ReimbursementType reimbursementType = ReimbursementType.valueOf(findReimbResults.getString("TYPE"));
-					int amount = findReimbResults.getInt("AMOUNT");
-					LocalDateTime submissionDate = findReimbResults.getTimestamp("SUBMISSION_DATE").toLocalDateTime();
-					LocalDateTime resolvedDate = findReimbResults.getTimestamp("RESOLVED_DATE").toLocalDateTime();
-					String description = findReimbResults.getString("DESCRIPTION");
-					Blob receipt = findReimbResults.getBlob("RECEIPT");
-					int author = findReimbResults.getInt("AUTHOR");
-					int resolver = findReimbResults.getInt("RESOLVER");
-					int status_ID = findReimbResults.getInt("STATUS_ID");
-					Reimbursement reimbursement;
-					if(reimbursementType == ReimbursementType.Lodging) {
-						reimbursement = new Lodging(reimb_ID, amount, submissionDate, resolvedDate, description,receipt,author,resolver,status_ID);
-					}else if (reimbursementType == ReimbursementType.Food){
-						reimbursement = new Food(reimb_ID, amount, submissionDate, resolvedDate, description,receipt,author,resolver,status_ID);
-					}else if (reimbursementType == ReimbursementType.Travel){
-						reimbursement = new Travel(reimb_ID, amount, submissionDate, resolvedDate, description,receipt,author,resolver,status_ID);
-					}else if (reimbursementType == ReimbursementType.Other){
-						reimbursement = new Other(reimb_ID, amount, submissionDate, resolvedDate, description,receipt,author,resolver,status_ID);
-					}else {
-						throw new Exception("Unknown account type");
-					}					
-						employee = new Employee(reimbursement);
-					}
-				else {
-					logger.warn("No reimbursement transaction was found for Reimbursement ID "+ reimb_ID);
-					}	
-				findReimbResults.close();
-				}catch(Exception e) {
-						logger.warn("Unable to retrieve information", e);
-					}
-				return employee;
-		}
+		public TreeMap<Integer, Reimbursement> getReimbursements(int user_ID) {
 
-		String getUser(int USER_ID) {
-			String userInformation = null;
+			TreeMap<Integer, Reimbursement> reimbursements = new TreeMap<>();
+			try (Connection connection = connect()) {
+
+				String findReimbursementSql = "SELECT * FROM \"ERS\".REIMBURSEMENTS WHERE REIMBURSEMENTS.AUTHOR_ID = ?;";
+				PreparedStatement findReimbursement = connection.prepareStatement(findReimbursementSql);
+				findReimbursement.setInt(1, user_ID);
+
+				ResultSet findReimbursementResults = findReimbursement.executeQuery();
+				int i = 1;
+				while (findReimbursementResults.next()) {
+					int reimb_ID = findReimbursementResults.getInt("REIMB_ID");
+					double amount = findReimbursementResults.getDouble("AMOUNT");
+					String submissionDate = findReimbursementResults.getString("SUBMISSION_DATE");
+					String resolvedDate = findReimbursementResults.getString("RESOLVED_DATE");
+					String description = findReimbursementResults.getString("DESCRIPTION");
+					byte[] receipt = findReimbursementResults.getBytes("RECEIPT");
+					int author = findReimbursementResults.getInt("AUTHOR_ID");
+					int resolver = findReimbursementResults.getInt("RESOLVER");
+					int status_ID = findReimbursementResults.getInt("STATUS_ID");
+					int type_ID = findReimbursementResults.getInt("TYPE");
+
+					Reimbursement reimbursement = new Reimbursement(reimb_ID, amount, submissionDate, resolvedDate, description,
+							receipt, author, resolver, status_ID, type_ID);
+					
+					reimbursements.put(i, reimbursement);
+					i++;
+				}
+				findReimbursementResults.close();
+			} catch (SQLException e) {
+				logger.warn("Failed to retrieve reimbursements", e);
+				e.printStackTrace();
+			}
+			return reimbursements;
+		}
+		
+		//Get specific user information
+		public User getUser(String username) {
 			try(Connection connection = connect()){
-			String findUserSql = "SELECT * FROM \"ERS\".Users WHERE Users.USER_ID=?";
+			String findUserSql = "SELECT * FROM \"ERS\".USERS WHERE USERS.USERNAME=?";
 			PreparedStatement findUser = connection.prepareStatement(findUserSql);
-			findUser.setInt(1, USER_ID);
+			findUser.setString(1, username);
 			ResultSet findUserResults = findUser.executeQuery();
 			if(findUserResults.next()) { 
-			String username = findUserResults.getString("USERNAME");
+			int user_ID = findUserResults.getInt("USER_ID");
+			String username1 = findUserResults.getString("USERNAME");
 			String password = findUserResults.getString("PASSWORD");
 			String firstName = findUserResults.getString("FIRST_NAME");
 			String lastName = findUserResults.getString("LAST_NAME");
 			String email = findUserResults.getString("EMAIL");
 			int role_ID = findUserResults.getInt("ROLE_ID");
 			
-			userInformation = "First name: " + firstName+ " Last name: " +lastName+ " Username: "+username+" Password: "+password+ " Email: "+email+" Role ID: "+role_ID;
-				}
+			User user = new User(user_ID, username1, password, firstName, lastName, email, role_ID);
+			findUserResults.close();
+			return user;
+			}
+			findUserResults.close();
 			} catch (SQLException e) {
 				logger.warn("Unable to retrieve User", e);
 				e.printStackTrace();
 			} 
-			return userInformation;
+			return null;
 			}
-
+		
+		//login method
 		String login(int user_ID) {
 			
 			String together = null;
@@ -238,7 +206,7 @@ public class DBService {
 			together = username+password;
 				}
 			} catch (SQLException e) {
-				logger.warn("Unable to succesfully log in");
+				logger.warn("Unable to succesfully request login information");
 			} 
 			return together;
 		}

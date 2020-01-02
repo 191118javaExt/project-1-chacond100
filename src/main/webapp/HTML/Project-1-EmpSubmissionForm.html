@@ -19,63 +19,67 @@
    
     <div class="page-header">
         <h1>Reimbursement Submission Form</h1>
-      </div>
-    <form>
+    </div>
+    
+    <form name="newReimbursementForm" onSubmit="submitReimbursement(event.preventDefault())">
+        
         <div class="form-group row">
-          <label for="inputAuthor ID" class="col-sm-2 col-form-label">Author ID</label>
+          <label for="Author_ID" class="col-sm-2 col-form-label">Author ID</label>
           <div class="col-sm-6">
-            <input type="Author ID" class="form-control" id="inputAuthor ID" placeholder="Author ID">
+            <input type="text" name="Author_ID"  id="Author_ID" placeholder="Author ID" class="form-control" required>
           </div>
         </div>
 
         <div class="form-group row">
-          <label for="inputDescription" class="col-sm-2 col-form-label">Description</label>
+          <label for="Description" class="col-sm-2 col-form-label">Description</label>
           <div class="col-sm-6">
-            <input type="Description" class="form-control" id="inputDescription" placeholder="Description">
+            <input type="text" name="Description" id="Description" placeholder="Description" class="form-control" required>
           </div>
         </div>
 
-        <div class="form-group row">
-            <label for="inputAmount" class="col-sm-2 col-form-label">Amount (USD)</label>
+       	<div class="form-group row">
+            <label for="Amount" class="col-sm-2 col-form-label">Amount (USD)</label>
             <div class="col-sm-6">
-              <input type="Amount" class="form-control" id="inputAmount" placeholder="1000">
+              <input type="text" name="Amount" id="Amount" placeholder="1000" class="form-control" required>
             </div>
           </div>
-
-        <div>
-          <form>
-            <div class="form-group">
-              <label for="exampleFormControlFile1">Receipt Image</label>
-              <input type="file" class="form-control-file" id="exampleFormControlFile1">
-            </div>
-          </form>  
-        </div>
-
+     
+         <div class="form-group">
+          	<label for="exampleFormControlFile1">Receipt Image</label>
+       		<div>
+           		<input type="file" class="form-control-file" id="exampleFormControlFile1">
+       		</div>
+         </div>
+       
         <fieldset class="form-group">
           <div class="row">
-            <legend style="color:white" class="col-form-label col-sm-2 pt-0">Reimbursement Type</legend>
+            <legend style="color:white" class="col-form-label col-sm-2 pt-0">type_ID</legend>
             <div class="col-sm-6">
+            
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="gridReimbursement Type" id="gridReimbursement Type1" value="option1" checked>
-                <label class="form-check-label" for="gridReimbursement Type1">
+                <input  type="radio" name="Type_ID" id="Lodging Reimbursement" value="100" class="form-check-input" checked>
+                <label class="form-check-label" for="Lodging Reimbursement">
                   Lodging
                 </label>
               </div>
+              
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="gridReimbursement Type" id="gridReimbursement Type2" value="option2">
-                <label class="form-check-label" for="gridReimbursement Type2">
+                <input type="radio" name="Type_ID" id="Travel Reimbursement" value="200" class="form-check-input" checked>
+                <label class="form-check-label" for="Travel Reimbursement">
                   Travel
                 </label>
               </div>
+              
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="gridReimbursement Type" id="gridReimbursement Type1" value="option1" checked>
-                <label class="form-check-label" for="gridReimbursement Type1">
+                <input type="radio" name="Type_ID" id="Food Reimbursement" value="300" class="form-check-input" checked>
+                <label class="form-check-label" for="Food Reimbursement">
                   Food
                 </label>
               </div>
+              
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="gridReimbursement Type" id="gridReimbursement Type2" value="option2">
-                <label class="form-check-label" for="gridReimbursement Type2">
+                <input type="radio" name="Type_ID" id="Other Reimbursement" value="400" class="form-check-input" checked>
+                <label class="form-check-label" for="Other Reimbursement">
                   Other
                 </label>
               </div>
@@ -86,10 +90,45 @@
         
         <div class="form-group row">
           <div class="col-sm-6">
-            <button style="background-color:white; color:rgb(73, 0, 0)" type="submit" class="btn btn-primary">Submit</button>
+            <button class="btn btn-primary" value="reimbursement submission" id="btnSubmitReimbursement" style="background-color:white; color:rgb(73, 0, 0)">Submit</button>
           </div>
         </div>
+        
       </form>
 </body>
 
+<script>
+function submitReimbursement() {
+		
+		let form = document.newReimbursementForm;
+		let Author_ID = form.Author_ID.value;
+    	let Description = form.Description.value;
+   	 	let Amount = form.Amount.value;
+    	let Type_ID= form.Type_ID.value;
+		let newReimbursementInfo = {
+			Author_ID: Author_ID,
+	        Description: Description,
+	        Amount: Amount,
+	        Type_ID: Type_ID,
+		}
+		
+		console.log(newReimbursementInfo)
+	
+		let xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			if((this.readyState === 4) && (this.status === 201)) {
+        		alert("Succesfully submitted new reimbursement form. Please wait 3-5 business days for approval.")
+				document.location.reload(true);
+			}
+			else if(this.readyState === 4 && this.status != 201) {
+				alert("Failed to succesfully submitt new reimbursement form");
+			}
+		};
+
+		xhr.open("POST", "http://localhost:8080/project-1/newReimbursement");
+		
+		xhr.send(JSON.stringify(newReimbursementInfo));
+		
+	}
+</script>
 </html>
