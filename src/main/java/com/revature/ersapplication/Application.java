@@ -13,7 +13,6 @@ import com.revature.models.ReimbursementStatus;
 import com.revature.models.ReimbursementType;
 import com.revature.models.Roles;
 import com.revature.models.User;
-import org.apache.commons.codec.digest.*;
 
 
 @SuppressWarnings("serial")
@@ -39,7 +38,7 @@ public class Application implements Serializable {
 		return simpleDateFormat.format(date);
 	}
 	
-	public ReimbursementStatus statusToEnum(int status_ID) {
+	public ReimbursementStatus conversionStatus_IDtoEnum(int status_ID) {
 		ReimbursementStatus status;
 		if(status_ID == 0) {
 			status = ReimbursementStatus.Pending;
@@ -54,7 +53,7 @@ public class Application implements Serializable {
 		return null;
 	}
 	
-	public int enumToStatus(ReimbursementStatus status_ID) {
+	public int conversionEnumToStatus_ID(ReimbursementStatus status_ID) {
 		int status;
 		if(status_ID == ReimbursementStatus.Pending) {
 			status = 0;
@@ -69,7 +68,7 @@ public class Application implements Serializable {
 		else return status=11111;
 	}
 
-	public ReimbursementType typeToEnum(int type_ID) {
+	public ReimbursementType conversionTypeIDtoEnum(int type_ID) {
 		ReimbursementType type;
 		if(type_ID == 100) {
 			type = ReimbursementType.Lodging;
@@ -87,7 +86,7 @@ public class Application implements Serializable {
 		return null;
 	}
 	
-	public int enumToType(ReimbursementType type_ID) {
+	public int conversionEnumtoTypeID(ReimbursementType type_ID) {
 		int type;
 		if(type_ID == ReimbursementType.Lodging) {
 			type = 100;
@@ -105,7 +104,7 @@ public class Application implements Serializable {
 		return 0;
 	}
 	
-	public Roles roleToEnum(int role_ID) {
+	public Roles conversionRoleIDtoEnum(int role_ID) {
 		Roles role;
 		if(role_ID == 100) {
 			role = Roles.Employee;
@@ -120,8 +119,8 @@ public class Application implements Serializable {
 	public TreeMap<Integer, Reimbursement> getReimbursements(int user_ID) {
 		TreeMap<Integer, Reimbursement> reimbursements = database.getReimbursements(user_ID);
 		for(int i = 1; i <= reimbursements.size(); i++) {
-			reimbursements.get(i).setStatus(statusToEnum(reimbursements.get(i).getStatus_ID()));
-			reimbursements.get(i).setType(typeToEnum(reimbursements.get(i).getType_ID()));
+			reimbursements.get(i).setStatus(conversionStatus_IDtoEnum(reimbursements.get(i).getStatus_ID()));
+			reimbursements.get(i).setType(conversionTypeIDtoEnum(reimbursements.get(i).getType_ID()));
 		}
 		return reimbursements;
 	}
@@ -144,7 +143,7 @@ public class Application implements Serializable {
 			if (user.getPassword().equals(password)) {
 				TreeMap<Integer, Reimbursement> reimbursements = database.getReimbursements(user.getUser_ID());
 				user.setReimbursements(reimbursements);
-				user.setRole(roleToEnum(user.getRole_ID()));
+				user.setRole(conversionRoleIDtoEnum(user.getRole_ID()));
 				return user;
 			} else {
 				return null;

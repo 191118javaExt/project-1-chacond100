@@ -1,15 +1,12 @@
 package com.revature.models;
 
-import java.util.Arrays;
-
-
 public class Reimbursement{
 	private int reimb_ID;
 	private double amount = 0;
 	private String submissionDate;
 	private String resolvedDate;
 	private String description;
-	private byte[] receipt;
+	//private byte[] receipt;
 	private int author;
 	private int resolver;
 	private ReimbursementStatus status = ReimbursementStatus.Pending;
@@ -19,14 +16,14 @@ public class Reimbursement{
 	
 	
 	public Reimbursement(int reimb_ID, double amount, String submissionDate, String resolvedDate,
-			String description, byte[] receipt, int author, int resolver, int status_ID, int type_ID) {
+						String description, int author, int resolver, int status_ID, int type_ID) {
 		super();
 		this.reimb_ID = reimb_ID;
 		this.amount = amount;
 		this.submissionDate = submissionDate;
 		this.resolvedDate = resolvedDate;
 		this.description = description;
-		this.receipt = receipt;
+		//this.receipt = receipt;
 		this.author = author;
 		this.resolver = resolver;
 		this.status_ID = status_ID;
@@ -34,6 +31,7 @@ public class Reimbursement{
 	}
 	 
 	public Reimbursement (ReimbursementEntry entry) {
+		super();
 		this.amount = entry.getAmount();
 		this.description = entry.getDescription();
 		this.type_ID = entry.getType_ID();
@@ -79,13 +77,13 @@ public class Reimbursement{
 		this.description = description;
 	}
 
-	public byte[] getReceipt() {
+	/*public byte[] getReceipt() {
 		return receipt;
 	}
 
 	public void setReceipt(byte[] receipt) {
 		this.receipt = receipt;
-	}
+	}*/
 
 	public int getAuthor() {
 		return author;
@@ -145,7 +143,7 @@ public class Reimbursement{
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + author;
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + Arrays.hashCode(receipt);
+		//result = prime * result + Arrays.hashCode(receipt);
 		result = prime * result + reimb_ID;
 		result = prime * result + ((resolvedDate == null) ? 0 : resolvedDate.hashCode());
 		result = prime * result + resolver;
@@ -176,8 +174,8 @@ public class Reimbursement{
 				return false;
 		} else if (!description.equals(other.description))
 			return false;
-		if (!Arrays.equals(receipt, other.receipt))
-			return false;
+		/*if (!Arrays.equals(receipt, other.receipt))
+			return false;*/
 		if (reimb_ID != other.reimb_ID)
 			return false;
 		if (resolvedDate == null) {
@@ -207,8 +205,7 @@ public class Reimbursement{
 	@Override
 	public String toString() {
 		return "Reimbursement [reimb_ID=" + reimb_ID + ", amount=" + amount + ", submissionDate=" + submissionDate
-				+ ", resolvedDate=" + resolvedDate + ", description=" + description + ", receipt="
-				+ Arrays.toString(receipt) + ", author=" + author + ", resolver=" + resolver + ", status=" + status
+				+ ", resolvedDate=" + resolvedDate + ", description=" + description + ", author=" + author + ", resolver=" + resolver + ", status=" + status
 				+ ", status_ID=" + status_ID + ", type=" + type + ", type_ID=" + type_ID + "]";
 	}
 	

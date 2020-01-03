@@ -173,3 +173,185 @@ org.postgresql.util.PSQLException: Bad value for type int : Lodging
 	at org.postgresql.jdbc.PgResultSet.getInt(PgResultSet.java:2498)
 	at com.revature.ersapplication.DBService.getReimbursements(DBService.java:150)
 	at com.revature.main.Driver.main(Driver.java:25)
+2020-01-02 20:01:06 WARN  DBService:98 - Unable to add reimbursement request
+org.postgresql.util.PSQLException: ERROR: column "author" of relation "reimbursements" does not exist
+  Position: 97
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
+	at com.revature.ersapplication.DBService.addReimbursement(DBService.java:93)
+	at com.revature.ersapplication.Application.addReimbursement(Application.java:133)
+	at com.revature.main.Driver.main(Driver.java:10)
+2020-01-02 20:06:14 WARN  DBService:98 - Unable to add reimbursement request
+org.postgresql.util.PSQLException: ERROR: INSERT has more target columns than expressions
+  Position: 129
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
+	at com.revature.ersapplication.DBService.addReimbursement(DBService.java:93)
+	at com.revature.ersapplication.Application.addReimbursement(Application.java:133)
+	at com.revature.main.Driver.main(Driver.java:10)
+2020-01-02 20:08:38 WARN  DBService:98 - Unable to add reimbursement request
+org.postgresql.util.PSQLException: ERROR: insert or update on table "reimbursements" violates foreign key constraint "reimbursements_resolver_fkey"
+  Detail: Key (resolver)=(0) is not present in table "users".
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
+	at com.revature.ersapplication.DBService.addReimbursement(DBService.java:93)
+	at com.revature.ersapplication.Application.addReimbursement(Application.java:133)
+	at com.revature.main.Driver.main(Driver.java:10)
+2020-01-02 20:16:10 WARN  DBService:98 - Unable to add reimbursement request
+org.postgresql.util.PSQLException: ERROR: insert or update on table "reimbursements" violates foreign key constraint "reimbursements_resolver_fkey"
+  Detail: Key (resolver)=(0) is not present in table "users".
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
+	at com.revature.ersapplication.DBService.addReimbursement(DBService.java:93)
+	at com.revature.ersapplication.Application.addReimbursement(Application.java:133)
+	at com.revature.main.Driver.main(Driver.java:10)
+2020-01-02 20:35:11 WARN  DBService:98 - Unable to add reimbursement request
+org.postgresql.util.PSQLException: ERROR: insert or update on table "reimbursements" violates foreign key constraint "reimbursements_resolver_fkey"
+  Detail: Key (resolver)=(0) is not present in table "users".
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
+	at com.revature.ersapplication.DBService.addReimbursement(DBService.java:93)
+	at com.revature.ersapplication.Application.addReimbursement(Application.java:133)
+	at com.revature.main.Driver.main(Driver.java:10)
+2020-01-02 20:40:58 WARN  DBService:98 - Unable to add reimbursement request
+org.postgresql.util.PSQLException: ERROR: insert or update on table "reimbursements" violates foreign key constraint "reimbursements_resolver_fkey"
+  Detail: Key (resolver)=(0) is not present in table "users".
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
+	at com.revature.ersapplication.DBService.addReimbursement(DBService.java:93)
+	at com.revature.ersapplication.Application.addReimbursement(Application.java:133)
+	at com.revature.main.Driver.main(Driver.java:10)
+2020-01-02 20:44:27 WARN  DBService:98 - Unable to add reimbursement request
+org.postgresql.util.PSQLException: ERROR: insert or update on table "reimbursements" violates foreign key constraint "reimbursements_resolver_fkey"
+  Detail: Key (resolver)=(0) is not present in table "users".
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
+	at com.revature.ersapplication.DBService.addReimbursement(DBService.java:93)
+	at com.revature.ersapplication.Application.addReimbursement(Application.java:133)
+	at com.revature.main.Driver.main(Driver.java:10)
+2020-01-02 20:44:42 WARN  DBService:98 - Unable to add reimbursement request
+org.postgresql.util.PSQLException: ERROR: insert or update on table "reimbursements" violates foreign key constraint "reimbursements_resolver_fkey"
+  Detail: Key (resolver)=(0) is not present in table "users".
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
+	at com.revature.ersapplication.DBService.addReimbursement(DBService.java:93)
+	at com.revature.ersapplication.Application.addReimbursement(Application.java:133)
+	at com.revature.main.Driver.main(Driver.java:10)
+2020-01-02 20:44:50 WARN  DBService:98 - Unable to add reimbursement request
+org.postgresql.util.PSQLException: ERROR: insert or update on table "reimbursements" violates foreign key constraint "reimbursements_resolver_fkey"
+  Detail: Key (resolver)=(0) is not present in table "users".
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
+	at com.revature.ersapplication.DBService.addReimbursement(DBService.java:93)
+	at com.revature.ersapplication.Application.addReimbursement(Application.java:133)
+	at com.revature.main.Driver.main(Driver.java:10)
+2020-01-02 20:49:39 WARN  DBService:98 - Unable to add reimbursement request
+org.postgresql.util.PSQLException: ERROR: insert or update on table "reimbursements" violates foreign key constraint "reimbursements_resolver_fkey"
+  Detail: Key (resolver)=(0) is not present in table "users".
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
+	at com.revature.ersapplication.DBService.addReimbursement(DBService.java:93)
+	at com.revature.ersapplication.Application.addReimbursement(Application.java:133)
+	at com.revature.main.Driver.main(Driver.java:10)
+2020-01-02 20:54:32 WARN  DBService:98 - Unable to add reimbursement request
+org.postgresql.util.PSQLException: ERROR: insert or update on table "reimbursements" violates foreign key constraint "reimbursements_resolver_fkey"
+  Detail: Key (resolver)=(0) is not present in table "users".
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
+	at com.revature.ersapplication.DBService.addReimbursement(DBService.java:93)
+	at com.revature.ersapplication.Application.addReimbursement(Application.java:133)
+	at com.revature.main.Driver.main(Driver.java:10)
+2020-01-02 20:58:03 WARN  DBService:98 - Unable to add reimbursement request
+org.postgresql.util.PSQLException: ERROR: insert or update on table "reimbursements" violates foreign key constraint "reimbursements_resolver_fkey"
+  Detail: Key (resolver)=(0) is not present in table "users".
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
+	at com.revature.ersapplication.DBService.addReimbursement(DBService.java:93)
+	at com.revature.ersapplication.Application.addReimbursement(Application.java:133)
+	at com.revature.main.Driver.main(Driver.java:10)
+2020-01-02 21:05:20 WARN  DBService:98 - Unable to add reimbursement request
+org.postgresql.util.PSQLException: ERROR: insert or update on table "reimbursements" violates foreign key constraint "reimbursements_resolver_fkey"
+  Detail: Key (resolver)=(0) is not present in table "users".
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
+	at com.revature.ersapplication.DBService.addReimbursement(DBService.java:93)
+	at com.revature.ersapplication.Application.addReimbursement(Application.java:133)
+	at com.revature.main.Driver.main(Driver.java:10)
+2020-01-02 21:07:12 WARN  DBService:98 - Unable to add reimbursement request
+org.postgresql.util.PSQLException: ERROR: insert or update on table "reimbursements" violates foreign key constraint "reimbursements_resolver_fkey"
+  Detail: Key (resolver)=(0) is not present in table "users".
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
+	at com.revature.ersapplication.DBService.addReimbursement(DBService.java:93)
+	at com.revature.ersapplication.Application.addReimbursement(Application.java:133)
+	at com.revature.main.Driver.main(Driver.java:11)

@@ -20,12 +20,12 @@
   </servlet-mapping>
   
   <servlet>
-  	<servlet-name>NewReimbursementServlet</servlet-name>
-  	<servlet-class>com.revature.web.NewReimbursementServlet</servlet-class>
+  	<servlet-name>ReimbursementServlet</servlet-name>
+  	<servlet-class>com.revature.web.ReimbursementServlet</servlet-class>
   </servlet>
   
   <servlet-mapping>
-  	<servlet-name>NewReimbursementServlet</servlet-name>
-  	<url-pattern>/newReimbursement</url-pattern>
+  	<servlet-name>ReimbursementServlet</servlet-name>
+  	<url-pattern>/reimbursement</url-pattern>
   </servlet-mapping>
 </web-app>

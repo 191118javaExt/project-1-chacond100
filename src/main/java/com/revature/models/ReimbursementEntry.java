@@ -31,7 +31,7 @@ public class ReimbursementEntry {
 	public void setType_ID(int type_ID) {
 		this.type_ID = type_ID;
 	}
-	public ReimbursementEntry(double amount, String description,  int type_ID) {
+	public ReimbursementEntry(double amount, String description, int type_ID) {
 		super();
 		this.amount = amount;
 		this.description = description;

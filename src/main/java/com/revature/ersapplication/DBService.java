@@ -54,7 +54,7 @@ public class DBService {
 		
 		try (Connection connection = connect()){
 			
-			String addUserSql = "INSERT INTO \"ERS\".USERS (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, EMAIL, ROLE_ID) VALUES (?,?,?,?,?,?)";
+			String addUserSql = "INSERT INTO USERS (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, EMAIL, ROLE_ID) VALUES (?,?,?,?,?,?)";
 			PreparedStatement addUser = connection.prepareStatement(addUserSql);
 			addUser.setString(1, user.getFirstName());
 			addUser.setString(2, user.getLastName());
@@ -79,8 +79,8 @@ public class DBService {
 		//Create Reimbursement
 		public boolean addReimbursement(Reimbursement reimbursement) {
 			try (Connection connection = connect()){
-				String addReimbursementSql = "INSERT INTO \"ERS\".REIMBURSEMENTS (AMOUNT, SUBMISSION_DATE, RESOLVED_DATE, DESCRIPTION, RECEIPT, AUTHOR, RESOLVER, STATUS_ID, TYPE) VALUES (?,?,?,?,?,?,?,?);";
-				PreparedStatement addReimbursement = connection.prepareStatement(addReimbursementSql, Statement.RETURN_GENERATED_KEYS);
+				String addReimbursementSql = "INSERT INTO REIMBURSEMENTS (AMOUNT, SUBMISSION_DATE, RESOLVED_DATE, DESCRIPTION, AUTHOR_ID, RESOLVER, STATUS_ID, TYPE) VALUES (?,?,?,?,?,?,?,?);";
+				PreparedStatement addReimbursement = connection.prepareStatement(addReimbursementSql);
 				addReimbursement.setDouble(1, reimbursement.getAmount());
 				addReimbursement.setString(2, reimbursement.getSubmissionDate());
 				addReimbursement.setString(3, reimbursement.getResolvedDate());
@@ -94,27 +94,26 @@ public class DBService {
 				if(verification == false) {
 					return true;
 				}
-			}catch(SQLException ex) {
-				logger.warn("Unable to add reimbursement request", ex);
-			}
-			return false;
-			}
+				}catch(SQLException ex) {
+					logger.warn("Unable to add reimbursement request", ex);
+				}
+				return false;
+				}
 
 		//Update Reimbursement Status
 		boolean updateReimbursement(Reimbursement reimbursement) {
 			try(Connection connection = connect()){
-				String updateReimbStatusSql = "UPDATE \"ERS\".REIMBURSEMENTS SET AMOUNT=?, SUBMISSIONS_DATE=?, DESCRIPTION=?, RECEIPT=?, AUTHOR=?, RESOLVER=?, STATUS_ID=?, TYPE=? WHERE REIMB_ID=?";  
+				String updateReimbStatusSql = "UPDATE REIMBURSEMENTS SET AMOUNT=?, SUBMISSIONS_DATE=?, SUBMISSIONS_DATE=?, DESCRIPTION=?, AUTHOR_ID=?, RESOLVER=?, STATUS_ID=?, TYPE=? WHERE REIMB_ID=?";  
 				PreparedStatement updateReimb = connection.prepareStatement(updateReimbStatusSql);
 				updateReimb.setDouble(1, reimbursement.getAmount());
 				updateReimb.setString(2, reimbursement.getSubmissionDate());
 				updateReimb.setString(3, reimbursement.getResolvedDate());
 				updateReimb.setString(4, reimbursement.getDescription());
-				updateReimb.setBytes(5, reimbursement.getReceipt());
-				updateReimb.setInt(6, reimbursement.getAuthor());
-				updateReimb.setInt(7, reimbursement.getResolver());
-				updateReimb.setInt(8, reimbursement.getStatus_ID());
-				updateReimb.setInt(9, reimbursement.getType_ID());
-				updateReimb.setInt(10, reimbursement.getReimb_ID());
+				//updateReimb.setBytes(5, reimbursement.getReceipt());
+				updateReimb.setInt(5, reimbursement.getAuthor());
+				updateReimb.setInt(6, reimbursement.getResolver());
+				updateReimb.setInt(7, reimbursement.getStatus_ID());
+				updateReimb.setInt(8, reimbursement.getType_ID());
 				boolean verification = updateReimb.execute();
 				if (verification == false) {
 					return true;
@@ -131,7 +130,7 @@ public class DBService {
 			TreeMap<Integer, Reimbursement> reimbursements = new TreeMap<>();
 			try (Connection connection = connect()) {
 
-				String findReimbursementSql = "SELECT * FROM \"ERS\".REIMBURSEMENTS WHERE REIMBURSEMENTS.AUTHOR_ID = ?;";
+				String findReimbursementSql = "SELECT * FROM REIMBURSEMENTS WHERE AUTHOR_ID = ?;";
 				PreparedStatement findReimbursement = connection.prepareStatement(findReimbursementSql);
 				findReimbursement.setInt(1, user_ID);
 
@@ -143,14 +142,13 @@ public class DBService {
 					String submissionDate = findReimbursementResults.getString("SUBMISSION_DATE");
 					String resolvedDate = findReimbursementResults.getString("RESOLVED_DATE");
 					String description = findReimbursementResults.getString("DESCRIPTION");
-					byte[] receipt = findReimbursementResults.getBytes("RECEIPT");
+					//byte[] receipt = findReimbursementResults.getBytes("RECEIPT");
 					int author = findReimbursementResults.getInt("AUTHOR_ID");
 					int resolver = findReimbursementResults.getInt("RESOLVER");
 					int status_ID = findReimbursementResults.getInt("STATUS_ID");
 					int type_ID = findReimbursementResults.getInt("TYPE");
 
-					Reimbursement reimbursement = new Reimbursement(reimb_ID, amount, submissionDate, resolvedDate, description,
-							receipt, author, resolver, status_ID, type_ID);
+					Reimbursement reimbursement = new Reimbursement(reimb_ID, amount, submissionDate, resolvedDate, description, author, resolver, status_ID, type_ID);
 					
 					reimbursements.put(i, reimbursement);
 					i++;
@@ -166,7 +164,7 @@ public class DBService {
 		//Get specific user information
 		public User getUser(String username) {
 			try(Connection connection = connect()){
-			String findUserSql = "SELECT * FROM \"ERS\".USERS WHERE USERS.USERNAME=?";
+			String findUserSql = "SELECT * FROM USERS WHERE USERNAME=?";
 			PreparedStatement findUser = connection.prepareStatement(findUserSql);
 			findUser.setString(1, username);
 			ResultSet findUserResults = findUser.executeQuery();
@@ -196,7 +194,7 @@ public class DBService {
 			
 			String together = null;
 			try(Connection connection = connect()){
-			String findUserSql = "SELECT USERNAME, PASSWORD FROM \"ERS\".USERS WHERE USER_ID=?";
+			String findUserSql = "SELECT USERNAME, PASSWORD FROM USERS WHERE USER_ID=?";
 			PreparedStatement findUser = connection.prepareStatement(findUserSql);
 			findUser.setInt(1, user_ID);
 			ResultSet findUserResults = findUser.executeQuery();
