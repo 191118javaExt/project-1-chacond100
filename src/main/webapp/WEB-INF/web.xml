@@ -28,4 +28,15 @@
   	<servlet-name>ReimbursementServlet</servlet-name>
   	<url-pattern>/reimbursement</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>NewUserServlet</servlet-name>
+  	<servlet-class>com.revature.web.NewUserServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>NewUserServlet</servlet-name>
+  	<url-pattern>/newUser</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

@@ -13,6 +13,16 @@ public class User {
 		private Roles role;
 		private int role_ID;
 		private TreeMap<Integer, Reimbursement> reimbursements;
+				
+		public User (UserEntry entry) {
+			super();
+			this.username = entry.getUsername();
+			this.password = entry.getPassword();
+			this.firstName = entry.getFirstName();
+			this.lastName = entry.getLastName();
+			this.email = entry.getEmail();
+			this.role_ID = entry.getRole_ID();
+		}
 		
 		public User() {
 			super();
@@ -21,6 +31,16 @@ public class User {
 		public User(int user_ID, String username, String password, String firstName, String lastName, String email, int role_ID) {
 			super();
 			this.user_ID = user_ID;
+			this.username = username;
+			this.password = password;
+			this.firstName = firstName;
+			this.lastName = lastName;
+			this.email = email;
+			this.role_ID = role_ID;
+		}
+		
+		public User(String username, String password, String firstName, String lastName, String email, int role_ID) {
+			super();
 			this.username = username;
 			this.password = password;
 			this.firstName = firstName;
