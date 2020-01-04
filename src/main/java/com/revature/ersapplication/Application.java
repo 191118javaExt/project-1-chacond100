@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 //import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.TreeMap;
 import org.apache.log4j.Logger;
 import com.revature.models.Reimbursement;
@@ -21,7 +22,7 @@ public class Application implements Serializable {
 	
 	final static Logger logger = Logger.getLogger(Application.class);
 	
-	private DBService database = new DBService();
+	private static DBService database = new DBService();
 	
 	public boolean validReimbursement(Reimbursement reimbursement) {
 		double amount = reimbursement.getAmount();
@@ -115,6 +116,10 @@ public class Application implements Serializable {
 			return role;
 		}
 		return null;
+	}
+	
+	public static List<Reimbursement> getReimbursementByID(int user_ID){
+		return database.getReimbursementByID(user_ID);
 	}
 	
 	public TreeMap<Integer, Reimbursement> getReimbursements(int user_ID) {

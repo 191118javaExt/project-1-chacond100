@@ -1,57 +1,97 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
+
 <body>
-<style>
-  body{background-color:rgb(73, 0, 0);}
-    .table{color:rgb(255, 255, 255);}
-    .container{color:rgb(255, 255, 255);}
-    .table{text-align:center}
-  
+  <style>
+    body {
+      background-color: rgb(73, 0, 0);
+    }
+
+    .table {
+      color: rgb(255, 255, 255);
+    }
+
+    .container {
+      color: rgb(255, 255, 255);
+    }
+
+    .table {
+      text-align: center
+    }
   </style>
-<div class="container">
-  <h2>Reimbursements</h2>
-  <p>Please contact HR for any further inquiries regarding reimbursements</p>                                                                                      
-  <div class="table-responsive">          
-  <table class="table">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Amount (USD)</th>
-        <th>Type</th>
-        <th>Description</th>
-        <th>Receipt</th>
-        <th>Time of Submission</th>
-        <th>Time of Approval</th>
-        <th>Status ID</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>100</td>
-        <td>Lodging</td>
-        <td>Lodging for the New York trip</td>
-        <td>Receipt</td>
-        <td>10:00 PM</td>
-        <td>3:05 AM</td>
-        <td>Approved</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="container">
+    <h2>Reimbursements</h2>
+    <p>Please contact HR for any further inquiries regarding reimbursements</p>
+    <div class="table-responsive">
+      <table class="table" id="ReimbursementTableHead">
+        <thead>
+          <tr>
+            <th>Reimbursement(ID)</th>
+            <th>Amount(USD)</th>
+            <th>Type(ID)</th>
+            <th>Description</th>
+            <th>Receipt</th>
+            <th>Submission(Time)</th>
+            <th>Approval(Time)</th>
+            <th>Status(ID)</th>
+            <th>Resolver(ID)</th>
+          </tr>
+        </thead>
+        <tbody id="ReimbursementTableBody">
+          <tr>
+            <td>1</td>
+            <td>100</td>
+            <td>Lodging</td>
+            <td>Lodging for the New York trip</td>
+            <td>Receipt</td>
+            <td>10:00 PM</td>
+            <td>3:05 AM</td>
+            <td>Approved</td>
+            <td>1</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <form action=http://localhost:8080/project-1/HTML/Project-1-EmpSubmissionForm.html> <button
+      style="background-color: white; color:rgb(73, 0, 0)" value="New Reimbursement"
+      class=" btn btn-secondary btn-lg btn-block">Submit new reimbursement</button>
+    </form>
   </div>
 
-  <form action = http://localhost:8080/project-1/HTML/Project-1-EmpSubmissionForm.html>
-    <button style="background-color: white; color:rgb(73, 0, 0)"  value = "New Reimbursement" class=" btn btn-secondary btn-lg btn-block">Submit new reimbursement</button>
-  </form>
-  
-
-</div>
-
 </body>
+
+<script>
+  let reimbursementTableBody = document.getElementById('ReimbursementTableBody');
+  console.log(reimbursementTableBody)
+  let userString = sessionStorage.getItem('currentUser');
+  if (userString === null) {
+    window.location = "http://localhost:8080/project-1/";
+    } else {
+      let reimbursementString = sessionStorage.getItem("reimbursement_list");
+      let reimbursement_list = JSON.parse(reimbursementString);
+      console.log(reimbursement_list);
+      for (reimb in reimbursement_list) {
+        var row = document.createElement('tr');
+        row.innerHTML = '<td>' + reimbursement_list[reimb].reimb_id + '</td>' +
+          '<td>' + reimbursement_list[reimb].Amount + '</td>' +
+          '<td>' + reimbursement_list[reimb].submitted + '</td>' +
+          '<td>' + reimbursement_list[reimb].resolved + '</td>' +
+          '<td>' + reimbursement_list[reimb].receipt + '</td>' +
+          '<td>' + reimbursement_list[reimb].desc + '</td>' +
+          '<td>' + reimbursement_list[reimb].resolver_id + '</td>' +
+          '<td>' + reimbursement_list[reimb].status_id + '</td>' +
+          '<td>' + reimbursement_list[reimb].type_id + '</td>';
+        reimb_body.appendChild(row);
+      };
+  }
+</script>
+
 </html>

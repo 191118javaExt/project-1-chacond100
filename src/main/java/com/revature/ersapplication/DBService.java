@@ -6,7 +6,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
+//import java.util.TreeMap;
 import java.util.TreeMap;
 
 import org.apache.log4j.Logger;
@@ -124,6 +127,35 @@ public class DBService {
 		}
 		
 		//Get reimbursements from specific user
+		public List<Reimbursement> getReimbursementByID(int user_ID) {
+			List<Reimbursement> list = new ArrayList<>();	
+			try(Connection connection = connect()){
+				String findReimbursementSql = "SELECT * FROM REIMBURSEMENT WHERE AUTHOR_ID=?";
+				PreparedStatement findReimbursement = connection.prepareStatement(findReimbursementSql);
+				findReimbursement.setInt(1, user_ID);
+				ResultSet findReimbursementResults = findReimbursement.executeQuery();
+				if(findReimbursementResults.next()) { 
+					int reimb_ID = findReimbursementResults.getInt("REIMB_ID");
+					double amount = findReimbursementResults.getDouble("AMOUNT");
+					String submissionDate = findReimbursementResults.getString("SUBMISSION_DATE");
+					String resolvedDate = findReimbursementResults.getString("RESOLVED_DATE");
+					String description = findReimbursementResults.getString("DESCRIPTION");
+					//byte[] receipt = findReimbursementResults.getBytes("RECEIPT");
+					int author = findReimbursementResults.getInt("AUTHOR_ID");
+					int resolver = findReimbursementResults.getInt("RESOLVER");
+					int status_ID = findReimbursementResults.getInt("STATUS_ID");
+					int type_ID = findReimbursementResults.getInt("TYPE");
+				
+					list.add(new Reimbursement(reimb_ID, amount, submissionDate, resolvedDate, description, author, resolver, status_ID, type_ID));
+				}
+				findReimbursementResults.close();
+				}catch (SQLException e) {
+					logger.warn("Unable to retrieve reimbursements", e);
+					e.printStackTrace();
+				} 
+				return list;
+		}
+		
 		public TreeMap<Integer, Reimbursement> getReimbursements(int user_ID) {
 
 			TreeMap<Integer, Reimbursement> reimbursements = new TreeMap<>();

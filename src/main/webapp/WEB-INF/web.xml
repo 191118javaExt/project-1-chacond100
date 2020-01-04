@@ -39,4 +39,14 @@
   	<url-pattern>/newUser</url-pattern>
   </servlet-mapping>
   
+  <servlet>  
+        <servlet-name>DisplayServlet</servlet-name>  
+        <servlet-class>com.revature.web.DisplayServlet</servlet-class>  
+    </servlet>  
+  
+    <servlet-mapping>  
+        <servlet-name>DisplayServlet</servlet-name>  
+        <url-pattern>/displayServlet</url-pattern>  
+    </servlet-mapping> 
+    
 </web-app>
