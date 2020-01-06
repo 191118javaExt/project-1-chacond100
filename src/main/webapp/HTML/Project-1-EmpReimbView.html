@@ -69,27 +69,55 @@
 </body>
 
 <script>
+ 
+	function tryDisplay() {
+		  
+		   let xhr = new XMLHttpRequest();
+		   xhr.onreadystatechange = function() {
+			   if((this.readyState === 4) && (this.status === 200)) {
+				   sessionStorage.setItem('reimbursement_list', this.responseText);
+           //you send a get request and send the response name to 'reimbursemenet_list'
+			   }
+			   if(this.readyState === 4 && this.status === 204) {
+				   alert("Failed to succesfully display reimbursement");
+			   }
+		   };
+   
+		   xhr.open("GET", "http://localhost:8080/project-1/displayServlet");
+		   xhr.send();
+		   
+	   }
+	
+	</script>
+
+<script>
   let reimbursementTableBody = document.getElementById('ReimbursementTableBody');
   console.log(reimbursementTableBody)
   let userString = sessionStorage.getItem('currentUser');
-  if (userString === null) {
+  console.log(userString);
+  let userObject = JSON.parse(userString);
+  if (userObject === null) {
     window.location = "http://localhost:8080/project-1/";
     } else {
-      let reimbursementString = sessionStorage.getItem("reimbursement_list");
-      let reimbursement_list = JSON.parse(reimbursementString);
+      //let reimbursementString = sessionStorage.getItem('reimbursement_list');
+      //let reimbursement_list = JSON.parse(reimbursementString);
+      //console.log(reimbursement_list);
+      let reimbursement_list = userObject.reimbursements;
       console.log(reimbursement_list);
       for (reimb in reimbursement_list) {
         var row = document.createElement('tr');
         row.innerHTML = '<td>' + reimbursement_list[reimb].reimb_id + '</td>' +
-          '<td>' + reimbursement_list[reimb].Amount + '</td>' +
-          '<td>' + reimbursement_list[reimb].submitted + '</td>' +
-          '<td>' + reimbursement_list[reimb].resolved + '</td>' +
+          '<td>' + reimbursement_list[reimb].amount + '</td>' +
+          //follows the reimbursement convention
+          '<td>' + reimbursement_list[reimb].type_ID + '</td>'; +
+          '<td>' + reimbursement_list[reimb].description + '</td>' +
           '<td>' + reimbursement_list[reimb].receipt + '</td>' +
-          '<td>' + reimbursement_list[reimb].desc + '</td>' +
-          '<td>' + reimbursement_list[reimb].resolver_id + '</td>' +
-          '<td>' + reimbursement_list[reimb].status_id + '</td>' +
-          '<td>' + reimbursement_list[reimb].type_id + '</td>';
-        reimb_body.appendChild(row);
+          '<td>' + reimbursement_list[reimb].submissionDate + '</td>' +
+          '<td>' + reimbursement_list[reimb].resolvedDate + '</td>' +
+          '<td>' + reimbursement_list[reimb].status_ID + '</td>' +
+          '<td>' + reimbursement_list[reimb].resolver + '</td>' ;
+                    
+        reimbursementTableBody.appendChild(row);
       };
   }
 </script>

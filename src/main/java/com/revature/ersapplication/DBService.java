@@ -130,7 +130,7 @@ public class DBService {
 		public List<Reimbursement> getReimbursementByID(int user_ID) {
 			List<Reimbursement> list = new ArrayList<>();	
 			try(Connection connection = connect()){
-				String findReimbursementSql = "SELECT * FROM REIMBURSEMENT WHERE AUTHOR_ID=?";
+				String findReimbursementSql = "SELECT * FROM REIMBURSEMENTS WHERE AUTHOR_ID=?";
 				PreparedStatement findReimbursement = connection.prepareStatement(findReimbursementSql);
 				findReimbursement.setInt(1, user_ID);
 				ResultSet findReimbursementResults = findReimbursement.executeQuery();
