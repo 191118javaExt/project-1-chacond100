@@ -56,7 +56,7 @@
   
     <servlet-mapping>  
         <servlet-name>StatusServlet</servlet-name>  
-        <url-pattern>/status</url-pattern>  
+        <url-pattern>/statusUpdate</url-pattern>  
     </servlet-mapping> 
     
     <servlet>  

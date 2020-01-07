@@ -52,7 +52,9 @@
 
   </div>
 
-  <form>
+  <form name="updateForm" method="POST" action="http://localhost:8080/project-1/statusUpdate"
+  			enctype="multipart/form-data">
+    
     <div class="form-group row">
       <label for="ReimbursementID" class="col-sm-2 col-form-label">Reimbursement ID</label>
       <div class="col-sm-6">
@@ -84,7 +86,9 @@
     
     <div class="form-group row">
       <div class="col-sm-6">
-        <button style="background-color: white; color:rgb(73, 0, 0)"  type="submit" class="btn btn-primary">Submit</button>
+        <button class="btn btn-primary" value="update submission" 
+        		id="btnSubmitUpdate"
+        		style="background-color: white; color:rgb(73, 0, 0)"  type="submit" >Submit</button>
       </div>
     </div>
   </form>
