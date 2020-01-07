@@ -155,32 +155,51 @@
 
  <script>
  
+ function getUser(username, password){
+
+		 loginInfo = {
+				username: username,
+				password: password,
+				}
+	 
+		 let xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function() {
+				if((this.readyState === 4) && (this.status === 200)) {
+					sessionStorage.setItem('currentUser', this.responseText);
+					window.location = "http://localhost:8080/project-1/HTML/Project-1-EmpReimbView.html";
+				}
+				if((this.readyState === 4) && (this.status === 418)) {
+					sessionStorage.setItem('currentUser', this.responseText);
+					console.log(this.responseText);
+					getReimbursements();
+				}
+				if(this.readyState === 4 && this.status === 204) {
+					alert("Failed to succesfully login");
+				} 
+			};
+			xhr.open("POST", "http://localhost:8080/project-1/login");
+			xhr.send(JSON.stringify(loginInfo));
+		}
+ 
  function tryLogin() {
 		
 		let loginForm = document.loginForm;
 		let username = loginForm.username.value;
 		let password = loginForm.password.value;
-		let loginInfo = {
-				username: username,
-				password: password,
+		getUser(username,password);
 		}
-		console.log(loginInfo);
+ 
+ function getReimbursements(){
 		let xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = function() {
 			if((this.readyState === 4) && (this.status === 200)) {
-				sessionStorage.setItem('currentUser', this.responseText);
-				window.location = "http://localhost:8080/project-1/HTML/Project-1-EmpReimbView.html";
-			}
-			if(this.readyState === 4 && this.status === 204) {
-				alert("Failed to succesfully login");
-			}
-		};
-
-		xhr.open("POST", "http://localhost:8080/project-1/login");
-		
-		xhr.send(JSON.stringify(loginInfo));
-		
-	}
+				sessionStorage.setItem('allReimbursements', this.responseText);
+				window.location = "http://localhost:8080/project-1/HTML/Project-1-ManagerReimbView.html";
+			} 
+		}
+		xhr.open("GET", "http://localhost:8080/project-1/displayAll");
+		xhr.send();
+ }
  
  </script>
 </html>

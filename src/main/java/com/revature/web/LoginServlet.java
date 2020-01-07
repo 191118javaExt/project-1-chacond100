@@ -27,6 +27,16 @@ public class LoginServlet extends HttpServlet{
 		private static ObjectMapper om = new ObjectMapper();
 		
 		@Override
+		protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+			try {
+				doPost(req, res);
+			} catch (ServletException | IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
+		@Override
 		protected void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException{
 			
@@ -42,9 +52,22 @@ public class LoginServlet extends HttpServlet{
 			String username = login.getUsername();
 			String password = login.getPassword();
 			logger.info("Login attempt from username:"+username);
+			
+		try {	
+			
 			User currentUser = application.login(username, password);
-			System.out.println(currentUser);
-			if(currentUser != null){
+			logger.info(currentUser);
+			if((currentUser != null ) && (currentUser.getRole_ID() == 1)){
+				HttpSession session = req.getSession();
+				session.setAttribute("username", username);
+				session.setAttribute("user_ID", currentUser.getUser_ID());
+				
+				PrintWriter outputStream = res.getWriter();
+				res.setContentType("application/json");
+				res.setStatus(418);
+				outputStream.println(om.writeValueAsString(currentUser));
+				logger.info(username+" succesfully logged in as a financial manager");
+			}else if ((currentUser != null) && (currentUser.getRole_ID() == 2)){
 				HttpSession session = req.getSession();
 				session.setAttribute("username", username);
 				session.setAttribute("user_ID", currentUser.getUser_ID());
@@ -53,12 +76,17 @@ public class LoginServlet extends HttpServlet{
 				res.setContentType("application/json");
 				res.setStatus(200);
 				outputStream.println(om.writeValueAsString(currentUser));
-				logger.info(username+" succesfully logged in");
+				logger.info(username+" succesfully logged in as an employee");
 			}else {
 				logger.warn("Failed to login with username:"+username);
 				res.setContentType("application/json");
 				res.setStatus(204);
 			}
+	}catch(NullPointerException e) {
+		logger.info("failed login with username: " + username);
+		res.setContentType("application/json");
+		res.setStatus(204);
+		}
 	}
 }
 	

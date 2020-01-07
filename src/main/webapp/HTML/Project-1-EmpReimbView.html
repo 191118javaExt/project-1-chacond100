@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<title>Employee Reimbursement View</title>
 </head>
 
 <body>
@@ -46,15 +47,15 @@
         </thead>
         <tbody id="ReimbursementTableBody">
           <tr>
-            <td>1</td>
-            <td>100</td>
-            <td>Lodging</td>
-            <td>Lodging for the New York trip</td>
-            <td>Receipt</td>
-            <td>10:00 PM</td>
-            <td>3:05 AM</td>
-            <td>Approved</td>
-            <td>1</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
           </tr>
         </tbody>
       </table>
@@ -83,7 +84,7 @@
 			   }
 		   };
    
-		   xhr.open("GET", "http://localhost:8080/project-1/displayServlet");
+		   xhr.open("GET", "http://localhost:8080/project-1/display");
 		   xhr.send();
 		   
 	   }
@@ -106,10 +107,10 @@
       console.log(reimbursement_list);
       for (reimb in reimbursement_list) {
         var row = document.createElement('tr');
-        row.innerHTML = '<td>' + reimbursement_list[reimb].reimb_id + '</td>' +
+        row.innerHTML = '<td>' + reimbursement_list[reimb].reimb_ID + '</td>' +
           '<td>' + reimbursement_list[reimb].amount + '</td>' +
           //follows the reimbursement convention
-          '<td>' + reimbursement_list[reimb].type_ID + '</td>'; +
+          '<td>' + reimbursement_list[reimb].type_ID + '</td>' +
           '<td>' + reimbursement_list[reimb].description + '</td>' +
           '<td>' + reimbursement_list[reimb].receipt + '</td>' +
           '<td>' + reimbursement_list[reimb].submissionDate + '</td>' +

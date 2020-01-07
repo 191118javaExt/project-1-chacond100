@@ -46,7 +46,27 @@
   
     <servlet-mapping>  
         <servlet-name>DisplayServlet</servlet-name>  
-        <url-pattern>/displayServlet</url-pattern>  
+        <url-pattern>/display</url-pattern>  
+    </servlet-mapping> 
+    
+    <servlet>  
+        <servlet-name>StatusServlet</servlet-name>  
+        <servlet-class>com.revature.web.StatusServlet</servlet-class>  
+    </servlet>  
+  
+    <servlet-mapping>  
+        <servlet-name>StatusServlet</servlet-name>  
+        <url-pattern>/status</url-pattern>  
+    </servlet-mapping> 
+    
+    <servlet>  
+        <servlet-name>DisplayAllServlet</servlet-name>  
+        <servlet-class>com.revature.web.DisplayAllServlet</servlet-class>  
+    </servlet>  
+  
+    <servlet-mapping>  
+        <servlet-name>DisplayAllServlet</servlet-name>  
+        <url-pattern>/displayAll</url-pattern>  
     </servlet-mapping> 
     
 </web-app>

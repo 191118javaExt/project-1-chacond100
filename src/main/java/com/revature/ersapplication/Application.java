@@ -40,6 +40,7 @@ public class Application implements Serializable {
 		return simpleDateFormat.format(date);
 	}
 	
+	
 	public ReimbursementStatus conversionStatus_IDtoEnum(int status_ID) {
 		ReimbursementStatus status;
 		if(status_ID == 0) {
@@ -142,7 +143,20 @@ public class Application implements Serializable {
 			return false;
 		}
 	}
-	
+	//MAKE SURE THIS METHOD IS CORRECT
+	public boolean updateReimbursement(int reimb_ID, int status_ID, int resolver) {
+		Reimbursement reimbursement = database.getReimbursementFromID(reimb_ID);
+		reimbursement.setStatus_ID(status_ID);
+		reimbursement.setResolvedDate(addSubmissionDate());
+		reimbursement.setResolver(resolver);
+		System.out.println(reimbursement);
+		if(database.updateReimbursementStatus(reimbursement)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public boolean addUser(UserEntry entry) {
 		User newUser = new User(entry);
 		boolean success = database.addUser(newUser);
@@ -169,6 +183,15 @@ public class Application implements Serializable {
 		//password = DigestUtils.sha256Hex(password);
 		User user = getUser(username, password);
 		return user;
+	}
+	
+	public TreeMap<Integer, Reimbursement> grabAllReimbursements() {
+		TreeMap<Integer, Reimbursement> allReimbursements = database.getAllReimbursements();
+		for(int i = 1; i <= allReimbursements.size(); i++) {
+			allReimbursements.get(i).setStatus(conversionStatus_IDtoEnum(allReimbursements.get(i).getStatus_ID()));
+			allReimbursements.get(i).setType(conversionTypeIDtoEnum(allReimbursements.get(i).getType_ID()));
+		}
+		return allReimbursements;
 	}
 	
 	/*

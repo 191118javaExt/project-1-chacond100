@@ -102,7 +102,7 @@ public class DBService {
 				return false;
 				}
 
-		//Update Reimbursement Status
+		//Update Reimbursement
 		boolean updateReimbursement(Reimbursement reimbursement) {
 			try(Connection connection = connect()){
 				String updateReimbStatusSql = "UPDATE REIMBURSEMENTS SET AMOUNT=?, SUBMISSIONS_DATE=?, SUBMISSIONS_DATE=?, DESCRIPTION=?, AUTHOR_ID=?, RESOLVER=?, STATUS_ID=?, TYPE=? WHERE REIMB_ID=?";  
@@ -125,6 +125,97 @@ public class DBService {
 				}
 			return false;	
 		}
+		
+		//Update Reimbursement Status
+		boolean updateReimbursementStatus(Reimbursement reimbursement) {
+			try(Connection connection = connect()){
+				String updateReimbStatusSql = "UPDATE REIMBURSEMENTS SET RESOLVED_DATE=?, RESOLVER=?, STATUS_ID=? WHERE REIMB_ID=?";  
+				PreparedStatement updateReimb = connection.prepareStatement(updateReimbStatusSql);
+				updateReimb.setString(1, reimbursement.getResolvedDate());
+				updateReimb.setInt(2, reimbursement.getResolver());
+				updateReimb.setInt(3, reimbursement.getStatus_ID());
+				updateReimb.setInt(4, reimbursement.getReimb_ID());
+				boolean verification = updateReimb.execute();
+				if (verification == false) {
+					return true;
+				}
+				}catch (SQLException ex) {
+					logger.warn("Unable to update reimbursement status", ex);
+					ex.printStackTrace();
+				}
+			return false;
+		}
+ 		
+		//Update Reimbursement Status (SUCCESFULLY)
+		public Reimbursement getReimbursementFromID(int reimb_ID) {
+			try(Connection connection = connect()){
+
+				String updateReimbursementStatusSql = "SELECT * FROM REIMBURSEMENTS WHERE REIMB_ID = ?";
+				PreparedStatement updateReimbursement = connection.prepareStatement(updateReimbursementStatusSql);
+				updateReimbursement.setInt(1, reimb_ID);
+
+				ResultSet rs = updateReimbursement.executeQuery();
+				while (rs.next()) {
+					int reimb_ID1 = rs.getInt("REIMB_ID");
+					double amount = rs.getDouble("AMOUNT");
+					String submissiont_date = rs.getString("SUBMISSION_DATE");
+					String resolved_date = rs.getString("RESOLVED_DATE");
+					String description = rs.getString("DESCRIPTION");
+					int author_ID = rs.getInt("AUTHOR_ID");
+					int resolver_ID = rs.getInt("RESOLVER");
+					int status_ID = rs.getInt("STATUS_ID");
+					int type_ID = rs.getInt("TYPE");
+
+					Reimbursement reimbursement = new Reimbursement(reimb_ID1, amount, submissiont_date, resolved_date, description, author_ID, resolver_ID, status_ID, type_ID);
+					return reimbursement;
+				}
+				rs.close();
+
+			} catch (SQLException e) {
+				logger.warn("Unable to retrieve reimbursement", e);
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		//Get all Reimbursements
+		public TreeMap<Integer, Reimbursement> getAllReimbursements() {
+
+			TreeMap<Integer, Reimbursement> getAllReimbursements = new TreeMap<>();
+			try (Connection connection = connect()) {
+
+				String getAllReimbursementsSql = "SELECT * FROM REIMBURSEMENTS";
+				PreparedStatement stmt = connection.prepareStatement(getAllReimbursementsSql);
+				
+				ResultSet rs = stmt.executeQuery();
+				int i = 1;
+				while (rs.next()) {
+					int reimb_ID = rs.getInt("REIMB_ID");
+					double amount = rs.getDouble("AMOUNT");
+					String submissionDate = rs.getString("SUBMISSION_DATE");
+					String resolvedDate = rs.getString("RESOLVED_DATE");
+					String description = rs.getString("DESCRIPTION");
+					//byte[] receipt = rs.getBytes("RECEIPT");
+					int author = rs.getInt("AUTHOR_ID");
+					int resolver = rs.getInt("RESOLVER");
+					int status_ID = rs.getInt("STATUS_ID");
+					int type_ID = rs.getInt("TYPE");
+
+					Reimbursement reimbursement = new Reimbursement(reimb_ID, amount, submissionDate, resolvedDate, description,
+							 author, resolver, status_ID, type_ID);
+					getAllReimbursements.put(i, reimbursement);
+					i++;
+
+				}
+				rs.close();
+
+			} catch (SQLException e) {
+				logger.warn("Unable to retrieve all Reimbursements", e);
+				e.printStackTrace();
+			}
+			return getAllReimbursements;
+		}
+		
 		
 		//Get reimbursements from specific user
 		public List<Reimbursement> getReimbursementByID(int user_ID) {
@@ -156,6 +247,7 @@ public class DBService {
 				return list;
 		}
 		
+		//Get reimbursements from specific user
 		public TreeMap<Integer, Reimbursement> getReimbursements(int user_ID) {
 
 			TreeMap<Integer, Reimbursement> reimbursements = new TreeMap<>();
