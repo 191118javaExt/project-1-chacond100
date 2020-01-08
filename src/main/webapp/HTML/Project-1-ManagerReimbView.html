@@ -52,13 +52,12 @@
 
   </div>
 
-  <form name="updateForm" method="POST" action="http://localhost:8080/project-1-chacond100/statusUpdate"
-  			>
+  <form name="updateForm" onSubmit="updateStatus(event.preventDefault())">
     
     <div class="form-group row">
       <label for="ReimbursementID" class="col-sm-2 col-form-label">Reimbursement ID</label>
       <div class="col-sm-6">
-        <input type="text" class="form-control" id="ReimbursementID" placeholder="Reimbursement ID">
+        <input type="text" class="form-control" id="ReimbursementID" placeholder="Reimbursement ID" name="reimb_ID">
       </div>
     </div>
    
@@ -142,6 +141,7 @@
   				reimb_ID: reimb_ID,
   				status_ID: status_ID,
   		}
+  		console.log(statusUpdateObject);
   		let xhr = new XMLHttpRequest();
   		xhr.onreadystatechange = function() {
   			if((this.readyState === 4) && (this.status === 200)) {

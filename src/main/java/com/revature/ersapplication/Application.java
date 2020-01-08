@@ -149,7 +149,6 @@ public class Application implements Serializable {
 		reimbursement.setStatus_ID(status_ID);
 		reimbursement.setResolvedDate(addSubmissionDate());
 		reimbursement.setResolver(resolver);
-		System.out.println(reimbursement);
 		if(database.updateReimbursementStatus(reimbursement)) {
 			return true;
 		} else {

@@ -39,7 +39,7 @@ public class StatusServlet extends HttpServlet {
 				throws ServletException, IOException {
 				HttpSession session = req.getSession();
 				int user_ID = (int) session.getAttribute("user_ID");
-				logger.info("Author ID: "+ user_ID);
+				logger.info("user_ID: "+ user_ID);
 				BufferedReader reader = req.getReader();
 				StringBuilder jsonInput = new StringBuilder();
 				String line = reader.readLine();
@@ -47,8 +47,9 @@ public class StatusServlet extends HttpServlet {
 					jsonInput.append(line);
 					line = reader.readLine();
 				}
+			
 				String jsonInputString = jsonInput.toString();
-				System.out.println(jsonInputString);
+				System.out.println("this is the jsonObject   ="+jsonInputString);
 				ReimbursementUpdate reimbursementUpdate = om.readValue(jsonInputString, ReimbursementUpdate.class);
 				int reimb_ID = reimbursementUpdate.getReimb_ID();
 				logger.info("Reimbursement ID :"+reimb_ID);
