@@ -12,29 +12,29 @@
 
 <body>
 	<style>
-body {
-	background-color: rgb(73, 0, 0);
-}
-
-.page-header {
-	color: rgb(255, 255, 255);
-}
-
-form {
-	color: rgb(255, 255, 255);
-}
-
-.form-check-label {
-	color: white
-}
-</style>
+		body {
+			background-color: rgb(73, 0, 0);
+		}
+		
+		.page-header {
+			color: rgb(255, 255, 255);
+		}
+		
+		form {
+			color: rgb(255, 255, 255);
+		}
+		
+		.form-check-label {
+			color: white
+		}
+	</style>
 
 	<div class="page-header">
 		<h1>Reimbursement Submission Form</h1>
 	</div>
 
 	<form name="reimbursementForm" method="POST"
-		action="http://localhost:8080/project-1/reimbursement" enctype="multipart/form-data">
+		action="http://localhost:8080/project-1-chacond100/reimbursement" enctype="multipart/form-data">
 		
 
 		<div class="form-group row">
@@ -139,14 +139,14 @@ form {
 				if ((this.readyState === 4) && (this.status === 201)) {
 					sessionStorage.setItem('newReimbursement', this.responseText);
 					alert("Succesfully submitted new reimbursement form. Please wait 3-5 business days for approval.")
-					window.location = "http://localhost:8080/project-1/HTML/Project-1-EmpReimbView.html";
+					window.location = "http://localhost:8080/project-1-chacond100/HTML/Project-1-EmpReimbView.html";
 				}
 				if (this.readyState === 4 && this.status != 201) {
 					alert("Failed to succesfully submitt new reimbursement form");
 				}
 			};
 
-			xhr.open("POST","http://localhost:8080/project-1/reimbursement");
+			xhr.open("POST","http://localhost:8080/project-1-chacond100/reimbursement");
 			xhr.send();
 		}
 	</script>

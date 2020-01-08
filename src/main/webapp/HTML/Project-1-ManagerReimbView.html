@@ -52,7 +52,7 @@
 
   </div>
 
-  <form name="updateForm" method="POST" action="http://localhost:8080/project-1/statusUpdate"
+  <form name="updateForm" method="POST" action="http://localhost:8080/project-1-chacond100/statusUpdate"
   			enctype="multipart/form-data">
     
     <div class="form-group row">
@@ -100,7 +100,7 @@
 	function populateTable(userString){
 	//let userString = sessionStorage.getItem('currentUser');
 	if (userString === null) {
-		window.location = "http://localhost:8080/project-1/";
+		window.location = "http://localhost:8080/project-1-chacond100/";
 	} else {
 		let userObject = JSON.parse(userString);
 		if(userObject !=null ){

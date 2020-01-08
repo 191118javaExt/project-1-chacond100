@@ -145,7 +145,7 @@
         </form>
             
         
-         <form action = "http://localhost:8080/project-1/HTML/Project-1-CreateUser.html">
+         <form action = "http://localhost:8080/project-1-chacond100/HTML/Project-1-CreateUser.html">
               <button  class="newuserbtn" value="New User" id="btnSubmitNewUser">New User</button>
         </form>
       
@@ -156,7 +156,6 @@
  <script>
  
  function getUser(username, password){
-
 		 loginInfo = {
 				username: username,
 				password: password,
@@ -166,7 +165,7 @@
 			xhr.onreadystatechange = function() {
 				if((this.readyState === 4) && (this.status === 200)) {
 					sessionStorage.setItem('currentUser', this.responseText);
-					window.location = "http://localhost:8080/project-1/HTML/Project-1-EmpReimbView.html";
+					window.location = "http://localhost:8080/project-1-chacond100/HTML/Project-1-EmpReimbView.html";
 				}
 				if((this.readyState === 4) && (this.status === 418)) {
 					sessionStorage.setItem('currentUser', this.responseText);
@@ -177,7 +176,7 @@
 					alert("Failed to succesfully login");
 				} 
 			};
-			xhr.open("POST", "http://localhost:8080/project-1/login");
+			xhr.open("POST", "http://localhost:8080/project-1-chacond100/login");
 			xhr.send(JSON.stringify(loginInfo));
 		}
  
@@ -194,12 +193,15 @@
 		xhr.onreadystatechange = function() {
 			if((this.readyState === 4) && (this.status === 200)) {
 				sessionStorage.setItem('allReimbursements', this.responseText);
-				window.location = "http://localhost:8080/project-1/HTML/Project-1-ManagerReimbView.html";
+				window.location = "http://localhost:8080/project-1-chacond100/HTML/Project-1-ManagerReimbView.html";
 			} 
 		}
-		xhr.open("GET", "http://localhost:8080/project-1/displayAll");
+		xhr.open("GET", "http://localhost:8080/project-1-chacond100/displayAll");
 		xhr.send();
  }
  
  </script>
 </html>
+
+
+

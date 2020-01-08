@@ -56,7 +56,7 @@ public class NewUserServlet extends HttpServlet {
 			if(newUser) {
 				res.setStatus(201);
 				logger.info("Succesfully submitted new user form");
-				res.sendRedirect("/project-1/HTML/Project-1-Login.html");
+				res.sendRedirect("/project-1-chacond100/HTML/Project_1_Login.html");
 			}
 			
 		}

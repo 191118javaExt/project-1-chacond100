@@ -22,7 +22,7 @@
       </div>
       
     <form name="newUserForm" method="POST"
-		action="http://localhost:8080/project-1/newUser" enctype="multipart/form-data">
+		action="http://localhost:8080/project-1-chacond100/newUser" enctype="multipart/form-data">
 		
         <div class="form-group row">
           <label for="FirstName" class="col-sm-2 col-form-label">First Name</label>
@@ -117,14 +117,14 @@
 				if ((this.readyState === 4) && (this.status === 201)) {
 					sessionStorage.setItem('newUser', this.responseText);
 					alert("Succesfully submitted new user form. Please wait 3-5 business days for approval.")
-					window.location = "http://localhost:8080/project-1/HTML/Project-1-Login.html";
+					window.location = "http://localhost:8080/project-1-chacond100/HTML/Project_1_Login.html";
 				}
 				if (this.readyState === 4 && this.status != 201) {
 					alert("Failed to succesfully submitt new reimbursement form");
 				}
 			};
 
-			xhr.open("POST","http://localhost:8080/project-1/newUser");
+			xhr.open("POST","http://localhost:8080/project-1-chacond100/newUser");
 			xhr.send();
 		}
 	</script>

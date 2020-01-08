@@ -55,7 +55,7 @@ public class ReimbursementServlet extends HttpServlet{
 		if(newReimb) {
 			res.setStatus(201);
 			logger.info("Succesfully submitted new reimbursement form");
-			res.sendRedirect("/project-1/HTML/Project-1-EmpReimbView.html");
+			res.sendRedirect("/project-1-chacond100/HTML/Project-1-EmpReimbView.html");
 		}
 		
 	}

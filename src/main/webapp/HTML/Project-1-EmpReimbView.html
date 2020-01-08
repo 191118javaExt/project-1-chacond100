@@ -61,7 +61,7 @@
       </table>
     </div>
 
-    <form action=http://localhost:8080/project-1/HTML/Project-1-EmpSubmissionForm.html> <button
+    <form action=http://localhost:8080/project-1-chacond100/HTML/Project-1-EmpSubmissionForm.html> <button
       style="background-color: white; color:rgb(73, 0, 0)" value="New Reimbursement"
       class=" btn btn-secondary btn-lg btn-block">Submit new reimbursement</button>
     </form>
@@ -84,7 +84,7 @@
 			   }
 		   };
    
-		   xhr.open("GET", "http://localhost:8080/project-1/display");
+		   xhr.open("GET", "http://localhost:8080/project-1-chacond100/display");
 		   xhr.send();
 		   
 	   }
@@ -98,7 +98,7 @@
   console.log(userString);
   let userObject = JSON.parse(userString);
   if (userObject === null) {
-    window.location = "http://localhost:8080/project-1/";
+    window.location = "http://localhost:8080/project-1-chacond100/";
     } else {
       //let reimbursementString = sessionStorage.getItem('reimbursement_list');
       //let reimbursement_list = JSON.parse(reimbursementString);
