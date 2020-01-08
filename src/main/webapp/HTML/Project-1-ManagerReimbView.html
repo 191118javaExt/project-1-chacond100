@@ -53,7 +53,7 @@
   </div>
 
   <form name="updateForm" method="POST" action="http://localhost:8080/project-1-chacond100/statusUpdate"
-  			enctype="multipart/form-data">
+  			>
     
     <div class="form-group row">
       <label for="ReimbursementID" class="col-sm-2 col-form-label">Reimbursement ID</label>
@@ -67,13 +67,13 @@
         
         <div class="col-sm-6">
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="ReimbursementType" id="ApprovedStatus" value="1" checked>
+            <input class="form-check-input" type="radio" name="status_ID" id="ApprovedStatus" value="1" checked>
             <label class="form-check-label" for="ApprovedStatus">
               Approved
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="ReimbursementType" id="DeclinedStatus" value="-1">
+            <input class="form-check-input" type="radio" name="status_ID" id="DeclinedStatus" value="-1" checked>
             <label class="form-check-label" for="DeclinedStatus">
               Declined
             </label>
@@ -98,13 +98,11 @@
 
 <script>
 	function populateTable(userString){
-	//let userString = sessionStorage.getItem('currentUser');
 	if (userString === null) {
 		window.location = "http://localhost:8080/project-1-chacond100/";
 	} else {
 		let userObject = JSON.parse(userString);
 		if(userObject !=null ){
-			//let allReimbursementsString = sessionStorage.getItem('allReimbursements');
 			let allReimbursementsObject = JSON.parse(allReimbursementsString);
 			console.log(allReimbursementsObject);
 			for (reimb in allReimbursementsObject) {
@@ -135,4 +133,29 @@
   	populateTable(userString);
   </script>
 
+<script>
+  	function updateStatus() {
+  		let statusForm = document.updateForm;
+  		let reimb_ID = statusForm.reimb_ID.value;
+  		let status_ID = statusForm.status_ID.value;
+  		let statusUpdateObject = {
+  				reimb_ID: reimb_ID,
+  				status_ID: status_ID,
+  		}
+  		let xhr = new XMLHttpRequest();
+  		xhr.onreadystatechange = function() {
+  			if((this.readyState === 4) && (this.status === 200)) {
+  				alert("Status was succesfully changed");
+  				getReimbursements();
+  				populateTable(userString);
+  				
+  			} 
+  			if((this.readyState === 4) && (this.status != 200))  {
+  				alert("Unable to update status.");
+  			}
+  		}
+  		xhr.open("POST", "http://localhost:8080/project-1-chacond100/statusUpdate");
+  		xhr.send(JSON.stringify(statusUpdateObject));
+  	}
+  </script>
 </html>

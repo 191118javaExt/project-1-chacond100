@@ -48,12 +48,16 @@ public class StatusServlet extends HttpServlet {
 					line = reader.readLine();
 				}
 				String jsonInputString = jsonInput.toString();
+				System.out.println(jsonInputString);
 				ReimbursementUpdate reimbursementUpdate = om.readValue(jsonInputString, ReimbursementUpdate.class);
 				int reimb_ID = reimbursementUpdate.getReimb_ID();
 				logger.info("Reimbursement ID :"+reimb_ID);
 				int status_ID = reimbursementUpdate.getStatus_ID();
 				logger.info("Status ID :"+status_ID);
 				if(application.updateReimbursement(reimb_ID, status_ID, user_ID)) {
+					//addition
+					res.setContentType("application/json");
+					//addition
 					res.setStatus(200);
 				}	
 			}
