@@ -65,6 +65,10 @@
       style="background-color: white; color:rgb(73, 0, 0)" value="New Reimbursement"
       class=" btn btn-secondary btn-lg btn-block">Submit new reimbursement</button>
     </form>
+    </br>
+    <button onclick="logout()" id="logout"
+      style="background-color: white; color:rgb(73, 0, 0)" value="Logout"
+      class=" btn btn-secondary btn-lg btn-block">Logout</button>
   </div>
 
 </body>
@@ -100,9 +104,7 @@
   if (userObject === null) {
     window.location = "http://localhost:8080/project-1-chacond100/";
     } else {
-      //let reimbursementString = sessionStorage.getItem('reimbursement_list');
-      //let reimbursement_list = JSON.parse(reimbursementString);
-      //console.log(reimbursement_list);
+  
       let reimbursement_list = userObject.reimbursements;
       console.log(reimbursement_list);
       for (reimb in reimbursement_list) {
@@ -121,6 +123,14 @@
         reimbursementTableBody.appendChild(row);
       };
   }
+  
+  function logout() {
+		let xhr = new XMLHttpRequest();
+		sessionStorage.clear();
+		xhr.open("POST", "http://localhost:8080/project-1-chacond100/logout");
+		xhr.send();
+		window.location = "http://localhost:8080/project-1-chacond100/HTML/Project_1_Login.html";
+	}
 </script>
 
 </html>

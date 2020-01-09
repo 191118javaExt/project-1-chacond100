@@ -83,12 +83,13 @@
       </div>
     </fieldset>
     
-    <div class="form-group row">
-      <div class="col-sm-6">
+    <div id="container">
         <button class="btn btn-primary" value="update submission" 
         		id="btnSubmitUpdate"
         		style="background-color: white; color:rgb(73, 0, 0)"  type="submit" >Submit</button>
-      </div>
+     	<button class="btn btn-primary" value="update submission" 
+        		id="btnLogin" onclick="logout()"
+        		style="background-color: white; color:rgb(73, 0, 0)"  type="submit" >Logout</button>
     </div>
   </form>
 </div>
@@ -157,5 +158,13 @@
   		xhr.open("POST", "http://localhost:8080/project-1-chacond100/statusUpdate");
   		xhr.send(JSON.stringify(statusUpdateObject));
   	}
+  	
+  	 function logout() {
+ 		let xhr = new XMLHttpRequest();
+ 		xhr.open("POST", "http://localhost:8080/project-1-chacond100/logout");
+ 		xhr.send();
+ 		sessionStorage.clear();
+ 		window.location = "http://localhost:8080/project-1-chacond100/HTML/Project_1_Login.html";
+ 	}
   </script>
 </html>

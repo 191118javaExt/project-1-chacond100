@@ -27,6 +27,16 @@
 		.form-check-label {
 			color: white
 		}
+		
+		#container{
+			text-align: center;
+			display: inline-block;
+		}
+		
+		button{
+			display: inline-block;
+		}
+		
 	</style>
 
 	<div class="page-header">
@@ -105,14 +115,16 @@
 			</div>
 		</fieldset>
 
-		<div class="form-group row">
-			<div class="col-sm-6">
-				<button class="btn btn-primary" value="reimbursement submission"
-					id="btnSubmitReimbursement"
-					style="background-color: white; color: rgb(73, 0, 0)">Submit</button>
-			</div>
+		<div id="container">
+			<button class="btn btn-primary" value="reimbursement submission"
+				id="btnSubmitReimbursement"
+				style="background-color: white; color: rgb(73, 0, 0)">Submit</button>
+				
+			<button class="btn btn-primary" value="Logout"  onclick="logout()"
+						id="btnSubmitReimbursement"
+						style="background-color: white; color: rgb(73, 0, 0); ">Logout</button>
 		</div>
-
+		
 	</form>
 </body>
 
@@ -149,6 +161,14 @@
 			xhr.open("POST","http://localhost:8080/project-1-chacond100/reimbursement");
 			xhr.send();
 		}
+		
+		 function logout() {
+				let xhr = new XMLHttpRequest();
+				xhr.open("POST", "http://localhost:8080/project-1-chacond100/logout");
+				xhr.send();
+				sessionStorage.clear();
+				window.location = "http://localhost:8080/project-1-chacond100/HTML/Project_1_Login.html";
+			}
 	</script>
 
 </html>
