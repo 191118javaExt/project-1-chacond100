@@ -6,7 +6,15 @@ public class ReimbursementEntry {
 	private String description;
 	private int author;
 	private int type_ID;
+	private byte[] receipt;
 	
+	
+	public byte[] getReceipt() {
+		return receipt;
+	}
+	public void setReceipt(byte[] receipt) {
+		this.receipt = receipt;
+	}
 	public double getAmount() {
 		return amount;
 	}
@@ -30,6 +38,13 @@ public class ReimbursementEntry {
 	}
 	public void setType_ID(int type_ID) {
 		this.type_ID = type_ID;
+	}
+	public ReimbursementEntry(double amount, String description, int type_ID, byte[] receipt) {
+		super();
+		this.amount = amount;
+		this.description = description;
+		this.type_ID = type_ID;
+		this.receipt = receipt;
 	}
 	public ReimbursementEntry(double amount, String description, int type_ID) {
 		super();

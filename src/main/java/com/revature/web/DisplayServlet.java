@@ -30,7 +30,7 @@ public class DisplayServlet extends HttpServlet{
 		
 		try {
 			int user_ID = (int) session.getAttribute("user_ID");
-			List<Reimbursement> list = Application.getReimbursementByID(user_ID);
+			List<Reimbursement> list = application.getReimbursementByID(user_ID);
 				if(list.isEmpty()) {
 					logger.warn("User does not have any reimbursements");	
 					res.setContentType("application/json");

@@ -2,7 +2,7 @@ package com.revature.web;
 
 
 import java.io.IOException;
-
+import java.io.InputStream;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 
 //import com.fasterxml.jackson.databind.ObjectMapper;
@@ -37,8 +39,15 @@ public class ReimbursementServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
+					
+		InputStream receiptToSend = null;
+		Part filePart = req.getPart("file");
+		if(filePart != null) {
+			receiptToSend = filePart.getInputStream();
+		}
+		HttpSession session = req.getSession(false);
 		
-		HttpSession session = req.getSession();
+		byte[] receipt = IOUtils.toByteArray(receiptToSend);
 		
 		int user_ID = (int) session.getAttribute("user_ID");
 		
@@ -48,7 +57,7 @@ public class ReimbursementServlet extends HttpServlet{
 		
 		String description = req.getParameter("Description");
 		
-		ReimbursementEntry input = new ReimbursementEntry(amount, description, type_ID);
+		ReimbursementEntry input = new ReimbursementEntry(amount, description, type_ID, receipt);
 		
 		boolean newReimb = application.addReimbursement(input, user_ID);
 		

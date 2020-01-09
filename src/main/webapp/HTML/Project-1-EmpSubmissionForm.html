@@ -46,7 +46,7 @@
 	<form name="reimbursementForm" method="POST"
 		action="http://localhost:8080/project-1-chacond100/reimbursement" enctype="multipart/form-data">
 		
-
+		<!-- 
 		<div class="form-group row">
 			<label for="Author_ID" class="col-sm-2 col-form-label">Author ID</label>
 			<div class="col-sm-6">
@@ -54,6 +54,9 @@
 					placeholder="Author ID" class="form-control" required>
 			</div>
 		</div>
+		
+		 -->
+		
 
 		<div class="form-group row">
 			<label for="Description" class="col-sm-2 col-form-label">Description</label>
@@ -75,7 +78,7 @@
 		<div class="form-group">
 			<label for="file">Receipt Image</label>
 			<div>
-				<input type="file" name="file" id="file" class="form-control-file">
+				<input type="file" name="receiptFile" id="receiptFile" class="form-control-file">
 			</div>
 		</div>
 
@@ -121,7 +124,7 @@
 				style="background-color: white; color: rgb(73, 0, 0)">Submit</button>
 				
 			<button class="btn btn-primary" value="Logout"  onclick="logout()"
-						id="btnSubmitReimbursement"
+						id="btnLogin"
 						style="background-color: white; color: rgb(73, 0, 0); ">Logout</button>
 		</div>
 		
@@ -169,6 +172,19 @@
 				sessionStorage.clear();
 				window.location = "http://localhost:8080/project-1-chacond100/HTML/Project_1_Login.html";
 			}
+		 
+		 function tryReceipt(event)
+			 {
+			 var reader = new FileReader();
+			 let file = event.target.files[0];
+			 reader.onloadend = () => {
+				 var data = reader.result.split(",")[1];
+		         sessionStorage.setItem("data", data);
+				 }
+			 if(file){
+				 reader.readAsDataURL(file);
+			 	}
+			 }
 	</script>
 
 </html>

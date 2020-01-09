@@ -81,7 +81,7 @@ public class DBService {
 		//Create Reimbursement
 		public boolean addReimbursement(Reimbursement reimbursement) {
 			try (Connection connection = connect()){
-				String addReimbursementSql = "INSERT INTO REIMBURSEMENTS (AMOUNT, SUBMISSION_DATE, RESOLVED_DATE, DESCRIPTION, AUTHOR_ID, RESOLVER, STATUS_ID, TYPE) VALUES (?,?,?,?,?,?,?,?);";
+				String addReimbursementSql = "INSERT INTO REIMBURSEMENTS (AMOUNT, SUBMISSION_DATE, RESOLVED_DATE, DESCRIPTION, AUTHOR_ID, RESOLVER, STATUS_ID, TYPE, RECEIPT) VALUES (?,?,?,?,?,?,?,?,?);";
 				PreparedStatement addReimbursement = connection.prepareStatement(addReimbursementSql);
 				addReimbursement.setDouble(1, reimbursement.getAmount());
 				addReimbursement.setString(2, reimbursement.getSubmissionDate());
@@ -91,6 +91,7 @@ public class DBService {
 				addReimbursement.setInt(6, reimbursement.getResolver());
 				addReimbursement.setInt(7, reimbursement.getStatus_ID());
 				addReimbursement.setInt(8, reimbursement.getType_ID());
+				addReimbursement.setBytes(9,reimbursement.getReceipt());
 				
 				boolean verification = addReimbursement.execute();
 				if(verification == false) {
@@ -105,17 +106,17 @@ public class DBService {
 		//Update Reimbursement
 		boolean updateReimbursement(Reimbursement reimbursement) {
 			try(Connection connection = connect()){
-				String updateReimbStatusSql = "UPDATE REIMBURSEMENTS SET AMOUNT=?, SUBMISSIONS_DATE=?, SUBMISSIONS_DATE=?, DESCRIPTION=?, AUTHOR_ID=?, RESOLVER=?, STATUS_ID=?, TYPE=? WHERE REIMB_ID=?";  
+				String updateReimbStatusSql = "UPDATE REIMBURSEMENTS SET AMOUNT=?, SUBMISSIONS_DATE=?, SUBMISSIONS_DATE=?, DESCRIPTION=?, AUTHOR_ID=?, RESOLVER=?, STATUS_ID=?, TYPE=?, RECEIPT=?, WHERE REIMB_ID=?";  
 				PreparedStatement updateReimb = connection.prepareStatement(updateReimbStatusSql);
 				updateReimb.setDouble(1, reimbursement.getAmount());
 				updateReimb.setString(2, reimbursement.getSubmissionDate());
 				updateReimb.setString(3, reimbursement.getResolvedDate());
 				updateReimb.setString(4, reimbursement.getDescription());
-				//updateReimb.setBytes(5, reimbursement.getReceipt());
 				updateReimb.setInt(5, reimbursement.getAuthor());
 				updateReimb.setInt(6, reimbursement.getResolver());
 				updateReimb.setInt(7, reimbursement.getStatus_ID());
 				updateReimb.setInt(8, reimbursement.getType_ID());
+				updateReimb.setBytes(9, reimbursement.getReceipt());
 				boolean verification = updateReimb.execute();
 				if (verification == false) {
 					return true;
@@ -165,8 +166,9 @@ public class DBService {
 					int resolver_ID = rs.getInt("RESOLVER");
 					int status_ID = rs.getInt("STATUS_ID");
 					int type_ID = rs.getInt("TYPE");
+					byte [] receipt = new byte[0];
 
-					Reimbursement reimbursement = new Reimbursement(reimb_ID1, amount, submissiont_date, resolved_date, description, author_ID, resolver_ID, status_ID, type_ID);
+					Reimbursement reimbursement = new Reimbursement(reimb_ID1, amount, submissiont_date, resolved_date, description, author_ID, resolver_ID, status_ID, type_ID, receipt);
 					return reimbursement;
 				}
 				rs.close();
@@ -195,14 +197,14 @@ public class DBService {
 					String submissionDate = rs.getString("SUBMISSION_DATE");
 					String resolvedDate = rs.getString("RESOLVED_DATE");
 					String description = rs.getString("DESCRIPTION");
-					//byte[] receipt = rs.getBytes("RECEIPT");
+					byte[] receipt = rs.getBytes("RECEIPT");
 					int author = rs.getInt("AUTHOR_ID");
 					int resolver = rs.getInt("RESOLVER");
 					int status_ID = rs.getInt("STATUS_ID");
 					int type_ID = rs.getInt("TYPE");
 
 					Reimbursement reimbursement = new Reimbursement(reimb_ID, amount, submissionDate, resolvedDate, description,
-							 author, resolver, status_ID, type_ID);
+							 author, resolver, status_ID, type_ID, receipt);
 					getAllReimbursements.put(i, reimbursement);
 					i++;
 
@@ -231,13 +233,13 @@ public class DBService {
 					String submissionDate = findReimbursementResults.getString("SUBMISSION_DATE");
 					String resolvedDate = findReimbursementResults.getString("RESOLVED_DATE");
 					String description = findReimbursementResults.getString("DESCRIPTION");
-					//byte[] receipt = findReimbursementResults.getBytes("RECEIPT");
+					byte[] receipt = findReimbursementResults.getBytes("RECEIPT");
 					int author = findReimbursementResults.getInt("AUTHOR_ID");
 					int resolver = findReimbursementResults.getInt("RESOLVER");
 					int status_ID = findReimbursementResults.getInt("STATUS_ID");
 					int type_ID = findReimbursementResults.getInt("TYPE");
 				
-					list.add(new Reimbursement(reimb_ID, amount, submissionDate, resolvedDate, description, author, resolver, status_ID, type_ID));
+					list.add(new Reimbursement(reimb_ID, amount, submissionDate, resolvedDate, description, author, resolver, status_ID, type_ID, receipt));
 				}
 				findReimbursementResults.close();
 				}catch (SQLException e) {
@@ -265,13 +267,13 @@ public class DBService {
 					String submissionDate = findReimbursementResults.getString("SUBMISSION_DATE");
 					String resolvedDate = findReimbursementResults.getString("RESOLVED_DATE");
 					String description = findReimbursementResults.getString("DESCRIPTION");
-					//byte[] receipt = findReimbursementResults.getBytes("RECEIPT");
+					byte[] receipt = findReimbursementResults.getBytes("RECEIPT");
 					int author = findReimbursementResults.getInt("AUTHOR_ID");
 					int resolver = findReimbursementResults.getInt("RESOLVER");
 					int status_ID = findReimbursementResults.getInt("STATUS_ID");
 					int type_ID = findReimbursementResults.getInt("TYPE");
 
-					Reimbursement reimbursement = new Reimbursement(reimb_ID, amount, submissionDate, resolvedDate, description, author, resolver, status_ID, type_ID);
+					Reimbursement reimbursement = new Reimbursement(reimb_ID, amount, submissionDate, resolvedDate, description, author, resolver, status_ID, type_ID, receipt);
 					
 					reimbursements.put(i, reimbursement);
 					i++;

@@ -1,12 +1,12 @@
 package com.revature.ersapplication;
 
 import java.io.Serializable;
-//import java.sql.Blob;
 import java.text.SimpleDateFormat;
-//import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.TreeMap;
+
+//import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.log4j.Logger;
 import com.revature.models.Reimbursement;
 import com.revature.models.ReimbursementEntry;
@@ -39,7 +39,6 @@ public class Application implements Serializable {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
 		return simpleDateFormat.format(date);
 	}
-	
 	
 	public ReimbursementStatus conversionStatus_IDtoEnum(int status_ID) {
 		ReimbursementStatus status;
@@ -119,7 +118,7 @@ public class Application implements Serializable {
 		return null;
 	}
 	
-	public static List<Reimbursement> getReimbursementByID(int user_ID){
+	public List<Reimbursement> getReimbursementByID(int user_ID){
 		return database.getReimbursementByID(user_ID);
 	}
 	

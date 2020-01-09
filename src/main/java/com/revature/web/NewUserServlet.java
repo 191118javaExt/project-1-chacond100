@@ -40,12 +40,6 @@ public class NewUserServlet extends HttpServlet {
 			String email = req.getParameter("Email");
 			int role_ID = Integer.parseInt(req.getParameter("Role_ID"));
 			
-			System.out.println(firstName);
-			System.out.println(lastName);
-			System.out.println(username);
-			System.out.println(password);
-			System.out.println(email);
-			System.out.println(role_ID);
 			
 			UserEntry entry = new UserEntry(username, password, firstName, lastName, email, role_ID);
 			
