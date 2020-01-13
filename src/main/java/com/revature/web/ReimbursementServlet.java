@@ -41,7 +41,7 @@ public class ReimbursementServlet extends HttpServlet{
 			throws ServletException, IOException {
 					
 		InputStream receiptToSend = null;
-		Part filePart = req.getPart("file");
+		Part filePart = req.getPart("receiptFile");
 		if(filePart != null) {
 			receiptToSend = filePart.getInputStream();
 		}

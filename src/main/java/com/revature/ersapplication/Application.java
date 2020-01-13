@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.TreeMap;
 
-//import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.log4j.Logger;
 import com.revature.models.Reimbursement;
 import com.revature.models.ReimbursementEntry;
