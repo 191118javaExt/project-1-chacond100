@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.TreeMap;
 
-import org.apache.commons.codec.digest.DigestUtils;
+//import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.log4j.Logger;
 import com.revature.models.Reimbursement;
 import com.revature.models.ReimbursementEntry;
@@ -178,7 +178,7 @@ public class Application implements Serializable {
 	}
 	
 	public User login(String username, String password) {
-		//password = DigestUtils.sha256Hex(password);
+		//String password = DigestUtils.sha256Hex(password1);
 		User user = getUser(username, password);
 		return user;
 	}
