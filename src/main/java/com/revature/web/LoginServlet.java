@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-//import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.log4j.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -51,8 +51,8 @@ public class LoginServlet extends HttpServlet{
 			String body = stringBuilder.toString();
 			Login login= om.readValue(body, Login.class);
 			String username = login.getUsername();
-			String password = login.getPassword();
-			//String password = DigestUtils.sha256Hex(password1);
+			String password1 = login.getPassword();
+			String password = DigestUtils.sha256Hex(password1);
 			logger.info("Login attempt from username:"+username);
 			
 		try {	

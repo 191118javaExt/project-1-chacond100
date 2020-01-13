@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-//import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import com.revature.ersapplication.Application;
 import com.revature.models.UserEntry;
@@ -37,8 +37,8 @@ public class NewUserServlet extends HttpServlet {
 			String firstName = req.getParameter("FirstName");
 			String lastName = req.getParameter("LastName");
 			String username = req.getParameter("Username");
-			String password = req.getParameter("Password");
-			//String password1 = DigestUtils.sha256Hex(password);
+			String password1 = req.getParameter("Password");
+			String password = DigestUtils.sha256Hex(password1);
 			String email = req.getParameter("Email");
 			int role_ID = Integer.parseInt(req.getParameter("Role_ID"));
 			
